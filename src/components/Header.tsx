@@ -23,7 +23,7 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
           <img src={logo} alt="Logo" className="h-10 w-10 transition-transform group-hover:scale-110 group-hover:rotate-6" />
-          <span className="text-xl font-bold text-primary transition-all group-hover:tracking-wider">ČistoZagreb</span>
+          <span className="text-xl font-bold text-primary transition-all group-hover:tracking-wider">Facility Servis</span>
         </Link>
 
         {/* Desktop Navigation */}

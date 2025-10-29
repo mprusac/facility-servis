@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <img src={logo} alt="Logo" className="h-10 w-10" />
-              <span className="text-lg font-bold text-primary">ČistoZagreb</span>
+              <span className="text-lg font-bold text-primary">Facility Servis</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Profesionalno čišćenje i održavanje – Vaš partner za besprijekornu čistoću u Zagrebu.
@@ -72,7 +72,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} ČistoZagreb. Sva prava zadržana.
+          © {new Date().getFullYear()} Facility Servis. Sva prava zadržana.
         </div>
       </div>
     </footer>
