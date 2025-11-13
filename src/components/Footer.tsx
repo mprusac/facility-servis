@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
-
 const Footer = () => {
-  return (
-    <footer className="border-t bg-muted/50">
+  return <footer className="border-t bg-muted/50">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -44,8 +42,7 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Kontakt</h3>
             <div className="flex flex-col gap-3">
-              <a href="tel:+385912345678" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
-                <Phone className="h-4 w-4" />
+              <a href="tel:+385912345678" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">​091 946 6599<Phone className="h-4 w-4" />
                 091 123 4567
               </a>
               <a href="mailto:info@cistozagreb.hr" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
@@ -75,8 +72,6 @@ const Footer = () => {
           © {new Date().getFullYear()} Facility Servis. Sva prava zadržana.
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
