@@ -15,7 +15,7 @@ const Home = () => {
   ];
 
   const benefits = [
-    "Iskustvo 10+ godina",
+    "Tehničko znanje",
     "Kvalitetna usluga",
     "Pouzdan i provjeren tim",
     "Ekološka sredstva",
