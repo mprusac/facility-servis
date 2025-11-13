@@ -135,7 +135,7 @@ const Home = () => {
                   Spremni za besprijekornu čistoću?
                 </h2>
                 <p className="text-xl mb-6 text-primary-foreground/90 animate-fade-in-up animate-delay-100">
-                  Kontaktirajte nas danas za besplatnu ponudu
+                  Kontaktirajte nas danas za besplatnu ponudu!
                 </p>
                 <Button asChild size="lg" variant="secondary" className="animate-fade-in-up animate-delay-200 transition-all hover:scale-110">
                   <Link to="/kontakt">Zatraži ponudu</Link>
