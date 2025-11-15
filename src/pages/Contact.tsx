@@ -39,8 +39,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "info@cistozagreb.hr",
-      link: "mailto:info@cistozagreb.hr",
+      content: "facility-servis@outlook.com",
+      link: "mailto:facility-servis@outlook.com",
     },
     {
       icon: MapPin,
@@ -50,7 +50,7 @@ const Contact = () => {
     {
       icon: Clock,
       title: "Radno vrijeme",
-      content: "Pon-Pet: 08:00 - 18:00\nSub: 09:00 - 14:00",
+      content: "Pon-Pet: 00-24h (Non-stop)",
     },
   ];
 
