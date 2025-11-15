@@ -64,8 +64,10 @@ const Contact = () => {
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Kontaktirajte nas</h1>
+              <p className="text-xl text-muted-foreground mb-4">
+                Slobodno nas kontaktirajte za besplatnu ponudu ili dodatne informacije.
+              </p>
               <p className="text-xl text-muted-foreground">
-                Slobodno nas kontaktirajte za besplatnu ponudu ili dodatne informacije. 
                 Rado ćemo odgovoriti na sva vaša pitanja.
               </p>
             </div>
