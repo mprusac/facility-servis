@@ -61,7 +61,7 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Radno vrijeme</h3>
             <div className="text-sm text-muted-foreground space-y-1">
-              <p>Ponedjeljak - Petak:</p>
+              <p>Ponedjeljak - Nedjelja:</p>
               <p className="font-medium">00 - 24h (Non-stop)
             </p>
               
