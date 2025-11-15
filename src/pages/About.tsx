@@ -10,7 +10,7 @@ const About = () => {
     {
       icon: Award,
       title: "Iskustvo i stručnost",
-      description: "Više od 10 godina iskustva u profesionalnom čišćenju i održavanju različitih vrsta objekata.",
+      description: "Višegodišnje iskustvo u profesionalnom čišćenju i održavanju različitih vrsta objekata.",
     },
     {
       icon: Users,
