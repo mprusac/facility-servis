@@ -15,7 +15,7 @@ const About = () => {
     {
       icon: Users,
       title: "Profesionalni tim",
-      description: "Naš tim čine iskusni djelatnici koji prolaze obuku za najviše standarde čistoće.",
+      description: "Naš tim čine iskusni djelatnici koji su prošli obuku za najviše standarde čistoće",
     },
     {
       icon: Leaf,
@@ -32,7 +32,7 @@ const About = () => {
   const commitments = [
     "Povjerljivost i diskrecija u radu",
     "Fleksibilnost u prilagođavanju rasporedu klijenata",
-    "Korištenje profesionalne opreme najnovije generacije",
+    "Korištenje profesionalne suvremene opreme",
     "Redovna obuka zaposlenika",
     "Brza reakcija na posebne zahtjeve",
     "Transparentne cijene bez skrivenih troškova",
@@ -56,7 +56,7 @@ const About = () => {
         </section>
 
         {/* Company Story */}
-        <section className="py-20">
+        <section className="pt-8 pb-20">
           <div className="container">
             <div className="max-w-4xl mx-auto">
               <div className="prose prose-lg max-w-none">
