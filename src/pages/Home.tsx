@@ -51,7 +51,7 @@ const Home = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fade-in-up animate-delay-300">
                 <Button asChild size="lg" className="text-lg transition-all hover:scale-105 hover:shadow-lg">
-                  <Link to="/kontakt">Zatraži besplatnu ponudu</Link>
+                  <Link to="/kontakt#kontakt-forma">Zatraži besplatnu ponudu</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="text-lg bg-white/10 border-white text-white hover:bg-white hover:text-primary transition-all hover:scale-105">
                   <Link to="/usluge">Pogledaj usluge</Link>
@@ -138,7 +138,7 @@ const Home = () => {
                   Kontaktirajte nas danas za besplatnu ponudu!
                 </p>
                 <Button asChild size="lg" variant="secondary" className="animate-fade-in-up animate-delay-200 transition-all hover:scale-110">
-                  <Link to="/kontakt">Zatraži ponudu</Link>
+                  <Link to="/kontakt#kontakt-forma">Zatraži ponudu</Link>
                 </Button>
               </CardContent>
             </Card>

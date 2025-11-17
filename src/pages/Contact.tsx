@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,23 @@ import Footer from "@/components/Footer";
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (window.location.hash === '#kontakt-forma') {
+      setTimeout(() => {
+        const element = document.getElementById('kontakt-forma');
+        if (element) {
+          const offset = 80; // space from top
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -79,7 +96,7 @@ const Contact = () => {
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
-              <Card className="h-fit" style={{ boxShadow: 'var(--shadow-card)' }}>
+              <Card id="kontakt-forma" className="h-fit" style={{ boxShadow: 'var(--shadow-card)' }}>
                 <CardHeader>
                   <CardTitle>Zatraži ponudu</CardTitle>
                   <CardDescription>
