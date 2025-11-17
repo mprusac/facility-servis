@@ -148,7 +148,7 @@ const About = () => {
                   Slobodno nas kontaktirajte za besplatnu ponudu ili dodatne informacije
                 </p>
                 <Button asChild size="lg" variant="secondary">
-                  <Link to="/kontakt">Kontaktirajte nas</Link>
+                  <Link to="/kontakt#kontakt-forma">Kontaktirajte nas</Link>
                 </Button>
               </CardContent>
             </Card>

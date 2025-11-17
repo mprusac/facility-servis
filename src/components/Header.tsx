@@ -37,7 +37,7 @@ const Header = () => {
               <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive(item.path) ? "w-full" : "w-0 group-hover:w-full"}`} />
             </Link>)}
           <Button asChild className="transition-all hover:scale-105 hover:shadow-lg">
-            <Link to="/kontakt">Zatraži ponudu</Link>
+            <Link to="/kontakt#kontakt-forma">Zatraži ponudu</Link>
           </Button>
         </nav>
 
@@ -54,7 +54,7 @@ const Header = () => {
                 {item.label}
               </Link>)}
             <Button asChild className="w-full transition-all hover:scale-105">
-              <Link to="/kontakt" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/kontakt#kontakt-forma" onClick={() => setIsMenuOpen(false)}>
                 Zatraži ponudu
               </Link>
             </Button>

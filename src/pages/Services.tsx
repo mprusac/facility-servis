@@ -112,7 +112,7 @@ const Services = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg">
-                  <Link to="/kontakt">Zatraži ponudu</Link>
+                  <Link to="/kontakt#kontakt-forma">Zatraži ponudu</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
                   <Link to="/galerija">Pogledaj galeriju</Link>
