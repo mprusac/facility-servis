@@ -2,6 +2,13 @@ import { Link } from "react-router-dom";
 import { Building2, Dumbbell, UtensilsCrossed, Home as HomeIcon, CheckCircle2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-cleaning.jpg";
@@ -24,6 +31,45 @@ const Home = () => {
     color: "text-secondary"
   }];
   const benefits = ["Tehničko znanje", "Kvalitetna usluga", "Pouzdan i provjeren tim", "Ekološka sredstva"];
+  
+  const testimonials = [
+    {
+      text: "Od kada koristimo njihove usluge, naši uredi blistaju! Profesionalan pristup i pažnja na detalje su izvanredni.",
+      author: "Marko P.",
+      location: "Zagreb",
+      company: "IT tvrtka"
+    },
+    {
+      text: "Odličan servis za naš sportski centar. Dolaze redovno, rade temeljito i nikada nas nisu razočarali.",
+      author: "Ana K.",
+      location: "Zagreb",
+      company: "Sportski centar"
+    },
+    {
+      text: "Preporučujem! Brzi, učinkoviti i pristupačni. Naš restoran uvijek izgleda besprijekorno čisto.",
+      author: "Tomislav G.",
+      location: "Zagreb",
+      company: "Restoran"
+    },
+    {
+      text: "Najpouzdanija usluga čišćenja s kojom smo radili. Njihov tim je uvijek ljubazan i profesionalan.",
+      author: "Ivana S.",
+      location: "Zagreb",
+      company: "Ured"
+    },
+    {
+      text: "Koristimo njihove usluge već godinu dana za našu stambenu zgradu. Stanari su vrlo zadovoljni!",
+      author: "Petar M.",
+      location: "Zagreb",
+      company: "Upravitelj zgrade"
+    },
+    {
+      text: "Izvrsna suradnja! Fleksibilni su s terminima i kvaliteta čišćenja je uvijek na visokoj razini.",
+      author: "Lucija B.",
+      location: "Zagreb",
+      company: "Korporativni ured"
+    }
+  ];
   return <div className="min-h-screen flex flex-col">
       <Header />
       
@@ -107,22 +153,53 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Testimonial */}
+        {/* Testimonials Slider */}
         <section className="py-20 bg-muted/50">
           <div className="container">
-            <Card className="max-w-3xl mx-auto hover-glow animate-scale-in">
-              <CardContent className="pt-8 text-center">
-                <div className="flex justify-center mb-4 gap-1">
-                  {[...Array(5)].map((_, i) => <span key={i} className={`text-2xl text-secondary animate-scale-in animate-delay-${i}00 inline-block transition-transform hover:scale-125`}>
-                      ★
-                    </span>)}
-                </div>
-                <blockquote className="text-xl md:text-2xl font-medium mb-4 animate-fade-in-up">
-                  "Od kada koristimo njihove usluge, naši uredi blistaju! Preporučujem."
-                </blockquote>
-                <cite className="text-muted-foreground animate-fade-in-up animate-delay-200">— Ivan M., Zagreb</cite>
-              </CardContent>
-            </Card>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Što kažu naši klijenti</h2>
+              <p className="text-muted-foreground">
+                Povjerenje naših klijenata je naša najveća vrijednost
+              </p>
+            </div>
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="max-w-5xl mx-auto"
+            >
+              <CarouselContent>
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
+                    <Card className="h-full hover-glow">
+                      <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full">
+                        <div className="flex justify-center mb-4 gap-1">
+                          {[...Array(5)].map((_, i) => (
+                            <span key={i} className="text-xl text-secondary inline-block">
+                              ★
+                            </span>
+                          ))}
+                        </div>
+                        <blockquote className="text-lg font-medium mb-6 flex-grow">
+                          "{testimonial.text}"
+                        </blockquote>
+                        <div className="text-center">
+                          <cite className="text-muted-foreground not-italic font-medium block">
+                            {testimonial.author}
+                          </cite>
+                          <span className="text-sm text-muted-foreground">
+                            {testimonial.company}, {testimonial.location}
+                          </span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
+            </Carousel>
           </div>
         </section>
 

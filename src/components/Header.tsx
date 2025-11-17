@@ -32,7 +32,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          {navItems.map(item => <Link key={item.path} to={item.path} className={`text-sm font-medium transition-all hover:text-primary relative group ${isActive(item.path) ? "text-primary" : "text-foreground/60"}`}>
+          {navItems.map(item => <Link key={item.path} to={item.path} className={`text-lg font-medium transition-all hover:text-primary relative group ${isActive(item.path) ? "text-primary" : "text-foreground/60"}`}>
               {item.label}
               <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive(item.path) ? "w-full" : "w-0 group-hover:w-full"}`} />
             </Link>)}
@@ -50,7 +50,7 @@ const Header = () => {
       {/* Mobile Navigation */}
       {isMenuOpen && <div className="md:hidden border-t animate-fade-in">
           <nav className="container flex flex-col gap-4 py-4">
-            {navItems.map(item => <Link key={item.path} to={item.path} onClick={() => setIsMenuOpen(false)} className={`text-sm font-medium transition-all hover:text-primary hover:translate-x-2 ${isActive(item.path) ? "text-primary" : "text-foreground/60"}`}>
+            {navItems.map(item => <Link key={item.path} to={item.path} onClick={() => setIsMenuOpen(false)} className={`text-lg font-medium transition-all hover:text-primary hover:translate-x-2 ${isActive(item.path) ? "text-primary" : "text-foreground/60"}`}>
                 {item.label}
               </Link>)}
             <Button asChild className="w-full transition-all hover:scale-105">
