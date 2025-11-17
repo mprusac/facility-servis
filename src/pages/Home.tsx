@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Building2, Dumbbell, UtensilsCrossed, Home as HomeIcon, CheckCircle2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,10 +10,24 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-cleaning.jpg";
 const Home = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const servicesSection = useScrollReveal();
+  const testimonialsSection = useScrollReveal();
+  const ctaSection = useScrollReveal();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const services = [{
     icon: Building2,
     title: "Poslovni prostori",
@@ -74,15 +89,19 @@ const Home = () => {
       <Header />
       
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* Hero Section with Parallax */}
         <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-cover bg-center animate-fade-in" style={{
-          backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url(${heroImage})`
-        }} />
+          <div 
+            className="absolute inset-0 bg-cover bg-center animate-fade-in parallax" 
+            style={{
+              backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url(${heroImage})`,
+              transform: `translateY(${scrollY * 0.5}px)`
+            }} 
+          />
           <div className="container relative py-24 md:py-32 text-white">
             <div className="max-w-2xl space-y-6">
               <div className="flex items-center gap-2 mb-4 animate-slide-in-left">
-                <Sparkles className="h-6 w-6 text-secondary animate-pulse" />
+                <Sparkles className="h-6 w-6 text-secondary animate-float" />
                 <span className="text-sm font-medium">Profesionalna usluga čišćenja</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight animate-fade-in-up">
@@ -122,7 +141,7 @@ const Home = () => {
         </section>
 
         {/* Services Overview */}
-        <section className="py-20">
+        <section ref={servicesSection.ref} className={`py-20 scroll-reveal ${servicesSection.isVisible ? 'revealed' : ''}`}>
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12 animate-fade-in-up">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Naše usluge</h2>
@@ -154,7 +173,7 @@ const Home = () => {
         </section>
 
         {/* Testimonials Slider */}
-        <section className="py-20 bg-muted/50">
+        <section ref={testimonialsSection.ref} className={`py-20 bg-muted/50 scroll-reveal ${testimonialsSection.isVisible ? 'revealed' : ''}`}>
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Što kažu naši klijenti</h2>
@@ -204,10 +223,11 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20">
+        <section ref={ctaSection.ref} className={`py-20 scroll-reveal-scale ${ctaSection.isVisible ? 'revealed' : ''}`}>
           <div className="container">
-            <Card className="bg-primary text-primary-foreground hover-lift animate-fade-in-up">
-              <CardContent className="pt-8 text-center">
+            <Card className="bg-primary text-primary-foreground hover-lift relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardContent className="pt-8 text-center relative z-10">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in-up">
                   Spremni za besprijekornu čistoću?
                 </h2>
