@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
@@ -8,21 +9,23 @@ import gallery5 from "@/assets/gallery-5.jpg";
 import gallery6 from "@/assets/gallery-6.jpg";
 
 const Gallery = () => {
+  const gallerySection = useScrollReveal();
+  const ctaSection = useScrollReveal();
   const images = [
     {
       src: gallery1,
-      alt: "Tim za čišćenje u akciji u korporativnom objektu",
-      caption: "Profesionalni tim za čišćenje korporativnih prostora",
+      alt: "Uredno organiziran skladišni prostor nakon čišćenja",
+      caption: "Profesionalno čišćenje i organizacija skladišnih prostora",
     },
     {
       src: gallery2,
-      alt: "Prije i poslije čišćenja ureda",
-      caption: "Prije i poslije - transformacija poslovnog prostora",
+      alt: "Čisto stepenište stambene zgrade",
+      caption: "Redovno održavanje stambenih zgrada",
     },
     {
       src: gallery3,
-      alt: "Čisti sportski objekt",
-      caption: "Održavanje sportskih objekata i teretana",
+      alt: "Uređena okućnica obiteljske kuće",
+      caption: "Održavanje okućnica i vrtova",
     },
     {
       src: gallery4,
@@ -59,7 +62,10 @@ const Gallery = () => {
         </section>
 
         {/* Gallery Grid */}
-        <section className="pt-8 pb-20">
+        <section 
+          ref={gallerySection.ref}
+          className={`pt-8 pb-20 scroll-reveal ${gallerySection.isVisible ? 'revealed' : ''}`}
+        >
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {images.map((image, index) => (
@@ -87,7 +93,10 @@ const Gallery = () => {
         </section>
 
         {/* Additional Images Placeholder */}
-        <section className="py-20 bg-muted/50">
+        <section 
+          ref={ctaSection.ref}
+          className={`py-20 bg-muted/50 scroll-reveal ${ctaSection.isVisible ? 'revealed' : ''}`}
+        >
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-bold mb-4">

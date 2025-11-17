@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ServiceCard from "@/components/ServiceCard";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const Services = () => {
+  const servicesSection = useScrollReveal();
+  const ctaSection = useScrollReveal();
   const services = [
     {
       icon: Building2,
@@ -80,7 +83,10 @@ const Services = () => {
         </section>
 
         {/* Services Grid */}
-        <section className="pt-8 pb-20">
+        <section 
+          ref={servicesSection.ref}
+          className={`pt-8 pb-20 scroll-reveal ${servicesSection.isVisible ? 'revealed' : ''}`}
+        >
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {services.map((service, index) => (
@@ -101,7 +107,10 @@ const Services = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-muted/50">
+        <section 
+          ref={ctaSection.ref}
+          className={`py-20 bg-muted/50 scroll-reveal ${ctaSection.isVisible ? 'revealed' : ''}`}
+        >
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">

@@ -7,12 +7,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formSection = useScrollReveal();
+  const contactInfoSection = useScrollReveal();
 
   useEffect(() => {
     if (window.location.hash === '#kontakt-forma') {
@@ -35,15 +39,39 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      company: formData.get('company') as string,
+      address: formData.get('address') as string,
+      serviceType: formData.get('serviceType') as string,
+      message: formData.get('message') as string,
+    };
+
+    try {
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: data,
+      });
+
+      if (error) throw error;
+
       toast({
         title: "Hvala na upitu!",
         description: "Javit ćemo Vam se u najkraćem roku.",
       });
-      setIsSubmitting(false);
       (e.target as HTMLFormElement).reset();
-    }, 1000);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Greška",
+        description: "Došlo je do greške. Molimo pokušajte ponovo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -96,7 +124,12 @@ const Contact = () => {
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
-              <Card id="kontakt-forma" className="h-fit" style={{ boxShadow: 'var(--shadow-card)' }}>
+              <Card 
+                id="kontakt-forma" 
+                ref={formSection.ref}
+                className={`h-fit scroll-reveal-left ${formSection.isVisible ? 'revealed' : ''}`}
+                style={{ boxShadow: 'var(--shadow-card)' }}
+              >
                 <CardHeader>
                   <CardTitle>Zatraži ponudu</CardTitle>
                   <CardDescription>
@@ -170,7 +203,10 @@ const Contact = () => {
               </Card>
 
               {/* Contact Information */}
-              <div className="space-y-6">
+              <div 
+                ref={contactInfoSection.ref}
+                className={`space-y-6 scroll-reveal ${contactInfoSection.isVisible ? 'revealed' : ''}`}
+              >
                 <div>
                   <h2 className="text-3xl font-bold mb-6">Kontakt podaci</h2>
                   <p className="text-lg text-muted-foreground mb-8">
