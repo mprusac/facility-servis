@@ -4,8 +4,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const About = () => {
+  const storySection = useScrollReveal();
+  const valuesSection = useScrollReveal();
+  const commitmentsSection = useScrollReveal();
+  const certificationsSection = useScrollReveal();
+  const ctaSection = useScrollReveal();
   const values = [
     {
       icon: Award,
@@ -56,23 +62,26 @@ const About = () => {
         </section>
 
         {/* Company Story */}
-        <section className="pt-8 pb-20">
+        <section 
+          ref={storySection.ref}
+          className={`pt-8 pb-20 scroll-reveal ${storySection.isVisible ? 'revealed' : ''}`}
+        >
           <div className="container">
             <div className="max-w-4xl mx-auto">
               <div className="prose prose-lg max-w-none">
                 <h2 className="text-3xl font-bold mb-6">Naša priča</h2>
                 <p className="text-lg text-muted-foreground mb-4">
-                  Obrt je osnovan 2015. godine s misijom pružanja vrhunske usluge čišćenja i održavanja 
-                  u Zagrebu i okolici. Kroz godine rada izgradili smo reputaciju pouzdanog partnera za 
+                  Obrt je osnovan s misijom pružanja vrhunske usluge čišćenja i održavanja 
+                  u Zagrebu i okolici. Kroz transparentan odnos izgradili smo reputaciju pouzdanog partnera za 
                   brojne poslovne i stambene objekte.
                 </p>
                 <p className="text-lg text-muted-foreground mb-4">
-                  Naš tim čine iskusni profesionalci koji dijele zajedničku strast prema izvrsnosti u 
+                  Naš obrt čine iskusni radnici koji dijele zajedničku strast prema izvrsnosti u 
                   radu. Vjerujemo da čist prostor doprinosi boljem radnom ozračju, većoj produktivnosti 
                   i općem zadovoljstvu korisnika prostora.
                 </p>
                 <p className="text-lg text-muted-foreground">
-                  Konstantno ulažemo u edukaciju naših djelatnika i najnoviju opremu kako bismo pratili 
+                  Konstantno ulažemo u edukaciju naših djelatnika i kvalitetnu opremu kako bismo pratili 
                   svjetske trendove u industriji čišćenja i našim klijentima pružili najbolju moguću 
                   uslugu.
                 </p>
@@ -82,7 +91,10 @@ const About = () => {
         </section>
 
         {/* Values Grid */}
-        <section className="py-20 bg-muted/50">
+        <section 
+          ref={valuesSection.ref}
+          className={`py-20 bg-muted/50 scroll-reveal ${valuesSection.isVisible ? 'revealed' : ''}`}
+        >
           <div className="container">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Što nas čini posebnima
@@ -107,7 +119,10 @@ const About = () => {
         </section>
 
         {/* Commitments */}
-        <section className="py-20">
+        <section 
+          ref={commitmentsSection.ref}
+          className={`py-20 scroll-reveal-left ${commitmentsSection.isVisible ? 'revealed' : ''}`}
+        >
           <div className="container">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold text-center mb-12">Naša obećanja klijentima</h2>
@@ -124,7 +139,10 @@ const About = () => {
         </section>
 
         {/* Certifications Section */}
-        <section className="py-20 bg-muted/50">
+        <section 
+          ref={certificationsSection.ref}
+          className={`py-20 bg-muted/50 scroll-reveal ${certificationsSection.isVisible ? 'revealed' : ''}`}
+        >
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-bold mb-4">Certifikati i standardi</h2>
@@ -137,7 +155,10 @@ const About = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20">
+        <section 
+          ref={ctaSection.ref}
+          className={`py-20 scroll-reveal ${ctaSection.isVisible ? 'revealed' : ''}`}
+        >
           <div className="container">
             <Card className="bg-primary text-primary-foreground max-w-3xl mx-auto">
               <CardContent className="pt-8 text-center">

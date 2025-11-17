@@ -49,6 +49,24 @@ const Home = () => {
   
   const testimonials = [
     {
+      text: "Naša okućnica izgleda odlično! Redovito održavanje i precizno šišanje žive ograde odrađeni su besprijekorno. Posao je odrađen uredno, točno i pažljivo.",
+      author: "Vanja G.",
+      location: "Zagreb",
+      company: "Obiteljska kuća"
+    },
+    {
+      text: "Zamjena silikona na kadi odrađena je iznimno profesionalno, a rezultat izgleda kao novo. Brzo, uredno i bez ikakvih komplikacija! Svakako preporučujem njihovu uslugu.",
+      author: "Mirko M.",
+      location: "Zagreb",
+      company: "Kućanski poslovi"
+    },
+    {
+      text: "Čišćenje skladišta odrađeno je iznad očekivanja! Sve je temeljito očišćeno, sortirano i vraćeno u red bez ikakvog ometanja našeg rada. Vrhunska usluga, iskrene preporuke!",
+      author: "Milena S.",
+      location: "Zagreb",
+      company: "Skladišni prostor"
+    },
+    {
       text: "Od kada koristimo njihove usluge, naši uredi blistaju! Profesionalan pristup i pažnja na detalje su izvanredni.",
       author: "Marko P.",
       location: "Zagreb",
