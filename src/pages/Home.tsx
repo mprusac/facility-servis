@@ -201,7 +201,7 @@ const Home = () => {
             </div>
             <Carousel
               opts={{
-                align: "center",
+                align: "start",
                 loop: true,
               }}
               className="max-w-5xl mx-auto"
