@@ -31,7 +31,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-6 ml-auto">
           {navItems.map(item => <Link key={item.path} to={item.path} className={`text-lg font-medium transition-all hover:text-primary relative group ${isActive(item.path) ? "text-primary" : "text-foreground/60"}`}>
               {item.label}
               <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive(item.path) ? "w-full" : "w-0 group-hover:w-full"}`} />
