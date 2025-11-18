@@ -24,14 +24,14 @@ const Header = () => {
   }];
   const isActive = (path: string) => location.pathname === path;
   return <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 animate-fade-in">
-      <div className="container flex h-16 items-center justify-between mx-0 my-0 pr-0">
+      <div className="container flex h-16 items-center justify-between mx-0 my-0 px-4 pr-0 max-w-full">
         <Link to="/" className="flex items-center gap-2 group">
           <img src={logo} alt="Logo" className="h-10 w-10 transition-transform group-hover:scale-110 group-hover:rotate-6" />
           <span className="text-xl font-bold text-primary transition-all group-hover:tracking-wider">Facility Servis</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6 ml-auto pr-4">
+        <nav className="hidden md:flex items-center gap-6 ml-auto pr-0">
           {navItems.map(item => <Link key={item.path} to={item.path} className={`text-lg font-medium transition-all hover:text-primary relative group ${isActive(item.path) ? "text-primary" : "text-foreground/60"}`}>
               {item.label}
               <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive(item.path) ? "w-full" : "w-0 group-hover:w-full"}`} />
