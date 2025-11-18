@@ -12,9 +12,18 @@ import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  serviceType?: string;
+}
+
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
   const formSection = useScrollReveal();
   const contactInfoSection = useScrollReveal();
 
@@ -35,11 +44,61 @@ const Contact = () => {
     }
   }, []);
 
+  const validateForm = (formData: FormData): FormErrors => {
+    const errors: FormErrors = {};
+    
+    const name = (formData.get('name') as string)?.trim();
+    const email = (formData.get('email') as string)?.trim();
+    const phone = (formData.get('phone') as string)?.trim();
+    const address = (formData.get('address') as string)?.trim();
+    const serviceType = formData.get('serviceType') as string;
+
+    if (!name || name.length < 2) {
+      errors.name = "Ime i prezime mora sadržavati najmanje 2 znaka";
+    }
+
+    if (!email) {
+      errors.email = "Email je obavezan";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Unesite valjanu email adresu";
+    }
+
+    if (!phone) {
+      errors.phone = "Telefon je obavezan";
+    } else if (!/^[\d\s\+\-\(\)]+$/.test(phone) || phone.length < 6) {
+      errors.phone = "Unesite valjan broj telefona";
+    }
+
+    if (!address || address.length < 5) {
+      errors.address = "Adresa mora sadržavati najmanje 5 znakova";
+    }
+
+    if (!serviceType) {
+      errors.serviceType = "Odaberite vrstu prostora/objekta";
+    }
+
+    return errors;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrors({});
+    
+    const formData = new FormData(e.currentTarget);
+    const validationErrors = validateForm(formData);
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      toast({
+        title: "Greška u formi",
+        description: "Molimo ispravite označena polja.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
@@ -62,6 +121,7 @@ const Contact = () => {
         description: "Javit ćemo Vam se u najkraćem roku.",
       });
       (e.target as HTMLFormElement).reset();
+      setErrors({});
     } catch (error) {
       console.error('Error sending email:', error);
       toast({
@@ -140,17 +200,43 @@ const Contact = () => {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
                       <Label htmlFor="name">Ime i prezime *</Label>
-                      <Input id="name" name="name" required placeholder="Vaše ime i prezime" />
+                      <Input 
+                        id="name" 
+                        name="name" 
+                        placeholder="Vaše ime i prezime"
+                        className={errors.name ? "border-destructive" : ""}
+                      />
+                      {errors.name && (
+                        <p className="text-sm text-destructive">{errors.name}</p>
+                      )}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="email">Email *</Label>
-                        <Input id="email" name="email" type="email" required placeholder="vas@email.com" />
+                        <Input 
+                          id="email" 
+                          name="email" 
+                          type="email" 
+                          placeholder="vas@email.com"
+                          className={errors.email ? "border-destructive" : ""}
+                        />
+                        {errors.email && (
+                          <p className="text-sm text-destructive">{errors.email}</p>
+                        )}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="phone">Telefon *</Label>
-                        <Input id="phone" name="phone" type="tel" required placeholder="091 234 5678" />
+                        <Input 
+                          id="phone" 
+                          name="phone" 
+                          type="tel" 
+                          placeholder="091 234 5678"
+                          className={errors.phone ? "border-destructive" : ""}
+                        />
+                        {errors.phone && (
+                          <p className="text-sm text-destructive">{errors.phone}</p>
+                        )}
                       </div>
                     </div>
 
@@ -161,13 +247,21 @@ const Contact = () => {
 
                     <div className="space-y-2">
                       <Label htmlFor="address">Adresa lokacije *</Label>
-                      <Input id="address" name="address" required placeholder="Adresa objekta za čišćenje" />
+                      <Input 
+                        id="address" 
+                        name="address" 
+                        placeholder="Adresa objekta za čišćenje"
+                        className={errors.address ? "border-destructive" : ""}
+                      />
+                      {errors.address && (
+                        <p className="text-sm text-destructive">{errors.address}</p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="serviceType">Vrsta prostora/objekta *</Label>
-                      <Select name="serviceType" required>
-                        <SelectTrigger>
+                      <Select name="serviceType">
+                        <SelectTrigger className={errors.serviceType ? "border-destructive" : ""}>
                           <SelectValue placeholder="Odaberite vrstu usluge" />
                         </SelectTrigger>
                         <SelectContent>
@@ -180,6 +274,9 @@ const Contact = () => {
                           <SelectItem value="ostalo">Ostalo</SelectItem>
                         </SelectContent>
                       </Select>
+                      {errors.serviceType && (
+                        <p className="text-sm text-destructive">{errors.serviceType}</p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
