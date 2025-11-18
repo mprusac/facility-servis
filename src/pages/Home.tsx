@@ -67,13 +67,13 @@ const Home = () => {
       company: "Skladišni prostor"
     },
     {
-      text: "Od kada koristimo njihove usluge, naši uredi blistaju! Profesionalan pristup i pažnja na detalje su izvanredni.",
+      text: "Od kada koristimo njihove usluge, naši uredi blistaju! Profesionalan pristup i pažnja na detalje su izvanredni. Uvijek se prilagode našem rasporedu i nikada ne kasne.",
       author: "Marko P.",
       location: "Zagreb",
       company: "IT tvrtka"
     },
     {
-      text: "Odličan servis za naš sportski centar. Dolaze redovno, rade temeljito i nikada nas nisu razočarali.",
+      text: "Odličan servis za naš sportski centar. Dolaze redovno, rade temeljito i nikada nas nisu razočarali. Posebno cijenimo njihovu brzinu i fleksibilnost tijekom sezone.",
       author: "Ana K.",
       location: "Zagreb",
       company: "Sportski centar"
@@ -85,7 +85,7 @@ const Home = () => {
       company: "Restoran"
     },
     {
-      text: "Najpouzdanija usluga čišćenja s kojom smo radili. Njihov tim je uvijek ljubazan i profesionalan.",
+      text: "Najpouzdanija usluga čišćenja s kojom smo radili. Njihov tim je uvijek ljubazan i profesionalan. Rezultati su konzistentno odlični i vidi se da im je stalo do kvalitete.",
       author: "Ivana S.",
       location: "Zagreb",
       company: "Ured"
@@ -201,16 +201,16 @@ const Home = () => {
             </div>
             <Carousel
               opts={{
-                align: "start",
+                align: "center",
                 loop: true,
               }}
               className="max-w-5xl mx-auto"
             >
-              <CarouselContent>
+              <CarouselContent className="items-center">
                 {testimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
-                    <Card className="h-full hover-glow">
-                      <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full">
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2 flex">
+                    <Card className="h-full hover-glow w-full">
+                      <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full justify-center">
                         <div className="flex justify-center mb-4 gap-1">
                           {[...Array(5)].map((_, i) => (
                             <span key={i} className="text-xl text-secondary inline-block">
@@ -218,7 +218,7 @@ const Home = () => {
                             </span>
                           ))}
                         </div>
-                        <blockquote className="text-lg font-medium mb-6 flex-grow">
+                        <blockquote className="text-lg font-medium mb-6 flex-grow text-center">
                           "{testimonial.text}"
                         </blockquote>
                         <div className="text-center">
@@ -234,8 +234,8 @@ const Home = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="hidden md:flex" />
-              <CarouselNext className="hidden md:flex" />
+              <CarouselPrevious className="hidden md:flex w-12 h-12 border-2 hover:scale-110 transition-transform shadow-lg bg-background/95 hover:bg-primary hover:text-primary-foreground" />
+              <CarouselNext className="hidden md:flex w-12 h-12 border-2 hover:scale-110 transition-transform shadow-lg bg-background/95 hover:bg-primary hover:text-primary-foreground" />
             </Carousel>
           </div>
         </section>
