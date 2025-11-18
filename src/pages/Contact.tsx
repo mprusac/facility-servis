@@ -165,12 +165,14 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="service">Vrsta usluge *</Label>
-                      <Select name="service" required>
+                      <Label htmlFor="serviceType">Vrsta prostora/objekta *</Label>
+                      <Select name="serviceType" required>
                         <SelectTrigger>
                           <SelectValue placeholder="Odaberite vrstu usluge" />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="obiteljska">Obiteljska kuća/okućnica</SelectItem>
+                          <SelectItem value="skladisni">Skladišni prostor</SelectItem>
                           <SelectItem value="poslovni">Poslovni prostori</SelectItem>
                           <SelectItem value="sportski">Sportski i korporativni objekti</SelectItem>
                           <SelectItem value="ugostiteljski">Ugostiteljski objekti</SelectItem>
@@ -178,11 +180,6 @@ const Contact = () => {
                           <SelectItem value="ostalo">Ostalo</SelectItem>
                         </SelectContent>
                       </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="date">Željeni datum i vrijeme</Label>
-                      <Input id="date" name="date" placeholder="npr. 15.03.2025. u 14:00" />
                     </div>
 
                     <div className="space-y-2">

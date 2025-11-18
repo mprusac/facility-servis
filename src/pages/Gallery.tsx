@@ -7,6 +7,9 @@ import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 import gallery5 from "@/assets/gallery-5.jpg";
 import gallery6 from "@/assets/gallery-6.jpg";
+import gallery7 from "@/assets/gallery-7.jpg";
+import gallery8 from "@/assets/gallery-8.jpg";
+import gallery9 from "@/assets/gallery-9.jpg";
 
 const Gallery = () => {
   const gallerySection = useScrollReveal();
@@ -39,8 +42,23 @@ const Gallery = () => {
     },
     {
       src: gallery6,
-      alt: "Profesionalno čišćenje hodnika u poslovnoj zgradi",
-      caption: "Redovno održavanje poslovnih prostora",
+      alt: "Čista i uredna teretana nakon čišćenja",
+      caption: "Profesionalno čišćenje sportskih objekata",
+    },
+    {
+      src: gallery7,
+      alt: "Uredno održavan uredski prostor",
+      caption: "Redovno čišćenje poslovnih ureda",
+    },
+    {
+      src: gallery8,
+      alt: "Čista konferencijska dvorana",
+      caption: "Održavanje poslovnih prostora po visokim standardima",
+    },
+    {
+      src: gallery9,
+      alt: "Uredno organiziran restoran nakon čišćenja",
+      caption: "Čišćenje ugostiteljskih prostora",
     },
   ];
 
