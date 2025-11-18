@@ -16,21 +16,6 @@ const Gallery = () => {
   const ctaSection = useScrollReveal();
   const images = [
     {
-      src: gallery1,
-      alt: "Uredno organiziran skladišni prostor nakon čišćenja",
-      caption: "Profesionalno čišćenje i organizacija skladišnih prostora",
-    },
-    {
-      src: gallery2,
-      alt: "Čisto stepenište stambene zgrade",
-      caption: "Redovno održavanje stambenih zgrada",
-    },
-    {
-      src: gallery3,
-      alt: "Uređena okućnica obiteljske kuće",
-      caption: "Održavanje okućnica i vrtova",
-    },
-    {
       src: gallery4,
       alt: "Čist restoran nakon čišćenja",
       caption: "Čišćenje ugostiteljskih objekata po visokim standardima",
@@ -59,6 +44,21 @@ const Gallery = () => {
       src: gallery9,
       alt: "Uredno organiziran restoran nakon čišćenja",
       caption: "Čišćenje ugostiteljskih prostora",
+    },
+    {
+      src: gallery1,
+      alt: "Uredno organiziran skladišni prostor nakon čišćenja",
+      caption: "Profesionalno čišćenje i organizacija skladišnih prostora",
+    },
+    {
+      src: gallery2,
+      alt: "Čisto stepenište stambene zgrade",
+      caption: "Redovno održavanje stambenih zgrada",
+    },
+    {
+      src: gallery3,
+      alt: "Uređena okućnica obiteljske kuće",
+      caption: "Održavanje okućnica i vrtova",
     },
   ];
 
