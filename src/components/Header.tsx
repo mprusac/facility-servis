@@ -24,12 +24,7 @@ const Header = () => {
   }];
   const isActive = (path: string) => location.pathname === path;
   return <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 animate-fade-in">
-      <div className="container flex h-16 items-center justify-between mx-0 my-0">
-        <Link to="/" className="flex items-center gap-2 group">
-          <img src={logo} alt="Logo" className="h-10 w-10 transition-transform group-hover:scale-110 group-hover:rotate-6" />
-          <span className="text-xl font-bold text-primary transition-all group-hover:tracking-wider">Facility Servis</span>
-        </Link>
-
+      <div className="container flex h-16 items-center gap-8 mx-0 my-0">
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           {navItems.map(item => <Link key={item.path} to={item.path} className={`text-lg font-medium transition-all hover:text-primary relative group ${isActive(item.path) ? "text-primary" : "text-foreground/60"}`}>
@@ -40,6 +35,11 @@ const Header = () => {
             <Link to="/kontakt#kontakt-forma">Zatraži ponudu</Link>
           </Button>
         </nav>
+
+        <Link to="/" className="flex items-center gap-2 group">
+          <img src={logo} alt="Logo" className="h-10 w-10 transition-transform group-hover:scale-110 group-hover:rotate-6" />
+          <span className="text-xl font-bold text-primary transition-all group-hover:tracking-wider">Facility Servis</span>
+        </Link>
 
         {/* Mobile Menu Button */}
         <button className="md:hidden transition-transform hover:scale-110" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
