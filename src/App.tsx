@@ -9,6 +9,7 @@ import Gallery from "./pages/Gallery";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import LogoProcessor from "./pages/LogoProcessor";
 import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/galerija" element={<Gallery />} />
           <Route path="/o-nama" element={<About />} />
           <Route path="/kontakt" element={<Contact />} />
+          <Route path="/process-logo" element={<LogoProcessor />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
