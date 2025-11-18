@@ -184,7 +184,7 @@ const Home = () => {
             </div>
             <div className="text-center mt-8 animate-fade-in-up animate-delay-400">
               <Button asChild size="lg" variant="outline" className="transition-all hover:scale-105">
-                <Link to="/usluge">Detaljnije o uslugama</Link>
+                <Link to="/kontakt#kontakt-forma">Detaljnije o uslugama</Link>
               </Button>
             </div>
           </div>
