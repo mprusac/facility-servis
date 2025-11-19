@@ -68,11 +68,11 @@ const Gallery = () => {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="py-16 sm:py-20 bg-gradient-to-b from-muted/50 to-background">
-          <div className="container px-4 sm:px-6">
+        <section className="py-20 bg-gradient-to-b from-muted/50 to-background">
+          <div className="container">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">Galerija radova</h1>
-              <p className="text-lg sm:text-xl text-muted-foreground px-4">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Galerija radova</h1>
+              <p className="text-xl text-muted-foreground">
                 Pogledajte primjere našeg rada i uvjerite se u kvalitetu naših usluga čišćenja
               </p>
             </div>
@@ -82,10 +82,10 @@ const Gallery = () => {
         {/* Gallery Grid */}
         <section 
           ref={gallerySection.ref}
-          className={`pt-8 pb-16 sm:pb-20 scroll-reveal ${gallerySection.isVisible ? 'revealed' : ''}`}
+          className={`pt-8 pb-20 scroll-reveal ${gallerySection.isVisible ? 'revealed' : ''}`}
         >
-          <div className="container px-4 sm:px-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          <div className="container">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {images.map((image, index) => (
                 <div
                   key={index}
@@ -96,13 +96,12 @@ const Gallery = () => {
                     <img
                       src={image.src}
                       alt={image.alt}
-                      loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                      <p className="text-white font-medium text-sm sm:text-base">{image.caption}</p>
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <p className="text-white font-medium">{image.caption}</p>
                     </div>
                   </div>
                 </div>

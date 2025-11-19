@@ -116,27 +116,27 @@ const Home = () => {
               transform: `translateY(${scrollY * 0.5}px)`
             }} 
           />
-          <div className="container relative py-20 sm:py-24 md:py-32 text-white px-4 sm:px-6">
-            <div className="max-w-2xl space-y-4 sm:space-y-6">
-              <div className="flex items-center gap-2 mb-2 sm:mb-4 animate-slide-in-left">
-                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-secondary animate-float" />
+          <div className="container relative py-24 md:py-32 text-white">
+            <div className="max-w-2xl space-y-6">
+              <div className="flex items-center gap-2 mb-4 animate-slide-in-left">
+                <Sparkles className="h-6 w-6 text-secondary animate-float" />
                 <span className="text-sm font-medium">Profesionalna usluga čišćenja</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight animate-fade-in-up">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight animate-fade-in-up">
                 Profesionalno čišćenje i održavanje
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-white/90 animate-fade-in-up animate-delay-100">
+              <p className="text-xl md:text-2xl text-white/90 animate-fade-in-up animate-delay-100">
                 Vaš partner za besprijekornu čistoću u Zagrebu
               </p>
-              <p className="text-base sm:text-lg text-white/80 animate-fade-in-up animate-delay-200">
+              <p className="text-lg text-white/80 animate-fade-in-up animate-delay-200">
                 Mali obrt za čišćenje s iskustvom, specijaliziran za održavanje poslovnih prostora, 
                 sportskih i korporativnih objekata, ugostiteljskih objekata i stambenih zgrada.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4 animate-fade-in-up animate-delay-300">
-                <Button asChild size="lg" className="text-base sm:text-lg min-h-[48px] transition-all hover:scale-105 hover:shadow-lg">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fade-in-up animate-delay-300">
+                <Button asChild size="lg" className="text-lg transition-all hover:scale-105 hover:shadow-lg">
                   <Link to="/kontakt#kontakt-forma">Zatraži besplatnu ponudu</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="text-base sm:text-lg min-h-[48px] bg-white/10 border-white text-white hover:bg-white hover:text-primary transition-all hover:scale-105">
+                <Button asChild size="lg" variant="outline" className="text-lg bg-white/10 border-white text-white hover:bg-white hover:text-primary transition-all hover:scale-105">
                   <Link to="/usluge">Pogledaj usluge</Link>
                 </Button>
               </div>
@@ -145,13 +145,13 @@ const Home = () => {
         </section>
 
         {/* Benefits Section */}
-        <section className="py-12 sm:py-16 bg-muted/50">
-          <div className="container px-4 sm:px-6">
-            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <section className="py-16 bg-muted/50">
+          <div className="container">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {benefits.map((benefit, index) => <Card key={index} className={`text-center hover-lift animate-scale-in animate-delay-${index}00`}>
-                  <CardContent className="pt-5 pb-5 sm:pt-6 sm:pb-6">
-                    <CheckCircle2 className="h-10 w-10 sm:h-8 sm:w-8 text-secondary mx-auto mb-3 transition-transform group-hover:scale-110" />
-                    <p className="font-medium text-sm sm:text-base">{benefit}</p>
+                  <CardContent className="pt-6">
+                    <CheckCircle2 className="h-8 w-8 text-secondary mx-auto mb-3 transition-transform group-hover:scale-110" />
+                    <p className="font-medium">{benefit}</p>
                   </CardContent>
                 </Card>)}
             </div>
@@ -159,31 +159,31 @@ const Home = () => {
         </section>
 
         {/* Services Overview */}
-        <section ref={servicesSection.ref} className={`py-16 sm:py-20 scroll-reveal ${servicesSection.isVisible ? 'revealed' : ''}`}>
-          <div className="container px-4 sm:px-6">
-            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 animate-fade-in-up">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Naše usluge</h2>
-              <p className="text-muted-foreground text-sm sm:text-base px-4">
+        <section ref={servicesSection.ref} className={`py-20 scroll-reveal ${servicesSection.isVisible ? 'revealed' : ''}`}>
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-12 animate-fade-in-up">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Naše usluge</h2>
+              <p className="text-muted-foreground mx-0 my-0 px-0 py-0 text-base">
                 Pružamo pouzdanu i kvalitetnu uslugu čišćenja uz pažnju na detalje i zadovoljstvo klijenata
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {services.map((service, index) => {
               const Icon = service.icon;
               return <Card key={index} className={`group hover-lift cursor-pointer animate-fade-in-up animate-delay-${index}00`} style={{
                 boxShadow: 'var(--shadow-card)'
               }}>
-                    <CardContent className="pt-6 pb-6 text-center">
-                      <div className="mb-4 inline-flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
-                        <Icon className={`h-7 w-7 sm:h-8 sm:w-8 ${service.color} transition-all group-hover:scale-110`} />
+                    <CardContent className="pt-6 text-center">
+                      <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+                        <Icon className={`h-8 w-8 ${service.color} transition-transform group-hover:scale-110`} />
                       </div>
-                      <h3 className="font-semibold text-base sm:text-lg transition-colors group-hover:text-primary">{service.title}</h3>
+                      <h3 className="font-semibold text-lg transition-colors group-hover:text-primary">{service.title}</h3>
                     </CardContent>
                   </Card>;
             })}
             </div>
-            <div className="text-center mt-10 sm:mt-12">
-              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto min-h-[48px] text-base transition-all hover:scale-105">
+            <div className="text-center mt-8 animate-fade-in-up animate-delay-400">
+              <Button asChild size="lg" variant="outline" className="transition-all hover:scale-105">
                 <Link to="/kontakt#kontakt-forma">Detaljnije o uslugama</Link>
               </Button>
             </div>
