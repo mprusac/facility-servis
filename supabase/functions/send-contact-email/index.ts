@@ -94,6 +94,63 @@ const handler = async (req: Request): Promise<Response> => {
       <p>${escapeHtml(formData.message)}</p>
     `;
 
+    // Build professional confirmation email for customer
+    const confirmationEmailHtml = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+            .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; }
+            .footer { background: #f9fafb; padding: 20px; text-align: center; font-size: 12px; color: #6b7280; border-radius: 0 0 8px 8px; }
+            .highlight { background: #eff6ff; padding: 15px; border-left: 4px solid #3b82f6; margin: 20px 0; }
+            .button { display: inline-block; background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1 style="margin: 0;">Facility Servis</h1>
+              <p style="margin: 10px 0 0 0; opacity: 0.9;">Profesionalno čišćenje i održavanje</p>
+            </div>
+            <div class="content">
+              <h2 style="color: #1e40af; margin-top: 0;">Poštovani/a ${escapeHtml(formData.name)},</h2>
+              
+              <p>Hvala Vam na pokazanom interesu za naše usluge!</p>
+              
+              <p>Primili smo Vaš zahtjev za ponudu i zahvaljujemo se na Vašem povjerenju. Vaš upit je trenutno u obradi, a naš stručni tim će ga detaljno razmotriti.</p>
+              
+              <div class="highlight">
+                <strong>📋 Detalji Vašeg zahtjeva:</strong><br>
+                <strong>Vrsta prostora:</strong> ${escapeHtml(formData.serviceType)}<br>
+                ${formData.address ? `<strong>Lokacija:</strong> ${escapeHtml(formData.address)}<br>` : ''}
+                ${formData.company ? `<strong>Tvrtka:</strong> ${escapeHtml(formData.company)}<br>` : ''}
+              </div>
+              
+              <p><strong>Javit ćemo Vam se povratno u najkraćem mogućem roku</strong> kako bismo dogovorili sve potrebne detalje i izradili personaliziranu ponudu prilagođenu Vašim potrebama.</p>
+              
+              <p>U međuvremenu, ako imate dodatnih pitanja ili želite razgovarati s nama, slobodno nas kontaktirajte:</p>
+              
+              <ul style="line-height: 2;">
+                <li>📞 Telefon: <strong>091 946 6599</strong></li>
+                <li>✉️ Email: <strong>facility-servis@outlook.com</strong></li>
+              </ul>
+              
+              <p style="margin-top: 30px;">S poštovanjem,<br>
+              <strong>Facility Servis tim</strong></p>
+            </div>
+            <div class="footer">
+              <p>© ${new Date().getFullYear()} Facility Servis - Profesionalne usluge čišćenja i održavanja</p>
+              <p>Ovaj email je automatski generiran kao potvrda Vašeg zahtjeva.</p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
     // Send email to owner
     const ownerEmailResponse = await resend.emails.send({
       from: "Facility Servis <onboarding@resend.dev>",
@@ -102,7 +159,17 @@ const handler = async (req: Request): Promise<Response> => {
       html: ownerEmailHtml,
     });
 
-    console.log("Email sent successfully:", ownerEmailResponse);
+    console.log("Email sent to owner:", ownerEmailResponse);
+
+    // Send confirmation email to customer
+    const confirmationEmailResponse = await resend.emails.send({
+      from: "Facility Servis <onboarding@resend.dev>",
+      to: [formData.email],
+      subject: "Hvala na Vašem upitu - Facility Servis",
+      html: confirmationEmailHtml,
+    });
+
+    console.log("Confirmation email sent to customer:", confirmationEmailResponse);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
