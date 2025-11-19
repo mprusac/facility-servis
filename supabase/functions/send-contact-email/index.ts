@@ -94,37 +94,15 @@ const handler = async (req: Request): Promise<Response> => {
       <p>${escapeHtml(formData.message)}</p>
     `;
 
-    // Build confirmation email HTML for user
-    const confirmationEmailHtml = `
-      <h2>Hvala što ste nas kontaktirali!</h2>
-      <p>Poštovani/a ${escapeHtml(formData.name)},</p>
-      <p>Primili smo Vaš zahtjev za ponudu i zahvaljujemo Vam na interesu za naše usluge.</p>
-      <p>Naš tim će pregledati Vaš zahtjev i javiti Vam se u najkraćem mogućem roku.</p>
-      <p><strong>Detalji Vašeg zahtjeva:</strong></p>
-      <p><strong>Vrsta prostora/objekta:</strong> ${escapeHtml(formData.serviceType)}</p>
-      ${formData.address ? `<p><strong>Adresa:</strong> ${escapeHtml(formData.address)}</p>` : ''}
-      <p>S poštovanjem,<br>Facility Servis tim</p>
-    `;
-
     // Send email to owner
     const ownerEmailResponse = await resend.emails.send({
       from: "Facility Servis <onboarding@resend.dev>",
-      to: ["marinprusac5@gmail.com"],
+      to: ["mprusac0@gmail.com"],
       subject: emailSubject,
       html: ownerEmailHtml,
     });
 
-    console.log("Owner email sent:", ownerEmailResponse);
-
-    // Send confirmation email to user
-    const confirmationEmailResponse = await resend.emails.send({
-      from: "Facility Servis <onboarding@resend.dev>",
-      to: [formData.email],
-      subject: "Hvala na Vašem upitu - Facility Servis",
-      html: confirmationEmailHtml,
-    });
-
-    console.log("Confirmation email sent to user:", confirmationEmailResponse);
+    console.log("Email sent successfully:", ownerEmailResponse);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
