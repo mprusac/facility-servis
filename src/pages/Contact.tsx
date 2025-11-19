@@ -199,8 +199,8 @@ const Contact = () => {
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Ime i prezime *</Label>
-                      <Input 
+                      <Label htmlFor="name">Ime i prezime</Label>
+                      <Input
                         id="name" 
                         name="name" 
                         placeholder="Vaše ime i prezime"
@@ -213,8 +213,8 @@ const Contact = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
-                        <Input 
+                        <Label htmlFor="email">Email</Label>
+                        <Input
                           id="email" 
                           name="email" 
                           type="email" 
@@ -226,8 +226,8 @@ const Contact = () => {
                         )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="phone">Telefon *</Label>
-                        <Input 
+                        <Label htmlFor="phone">Telefon</Label>
+                        <Input
                           id="phone" 
                           name="phone" 
                           type="tel" 
@@ -246,8 +246,8 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="address">Adresa lokacije *</Label>
-                      <Input 
+                      <Label htmlFor="address">Adresa lokacije</Label>
+                      <Input
                         id="address" 
                         name="address" 
                         placeholder="Adresa objekta za čišćenje"
@@ -259,7 +259,7 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="serviceType">Vrsta prostora *</Label>
+                      <Label htmlFor="serviceType">Vrsta prostora</Label>
                       <Select name="serviceType">
                         <SelectTrigger className={errors.serviceType ? "border-destructive" : ""}>
                           <SelectValue placeholder="Odaberite vrstu usluge" />
