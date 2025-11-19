@@ -197,42 +197,42 @@ const Contact = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Ime i prezime *</Label>
+                      <Label htmlFor="name" className="text-sm sm:text-base">Ime i prezime *</Label>
                       <Input 
                         id="name" 
                         name="name" 
                         placeholder="Vaše ime i prezime"
-                        className={errors.name ? "border-destructive" : ""}
+                        className={`min-h-[48px] text-base ${errors.name ? "border-destructive" : ""}`}
                       />
                       {errors.name && (
                         <p className="text-sm text-destructive">{errors.name}</p>
                       )}
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
+                        <Label htmlFor="email" className="text-sm sm:text-base">Email *</Label>
                         <Input 
                           id="email" 
                           name="email" 
                           type="email" 
                           placeholder="vas@email.com"
-                          className={errors.email ? "border-destructive" : ""}
+                          className={`min-h-[48px] text-base ${errors.email ? "border-destructive" : ""}`}
                         />
                         {errors.email && (
                           <p className="text-sm text-destructive">{errors.email}</p>
                         )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="phone">Telefon *</Label>
+                        <Label htmlFor="phone" className="text-sm sm:text-base">Telefon *</Label>
                         <Input 
                           id="phone" 
                           name="phone" 
                           type="tel" 
                           placeholder="091 234 5678"
-                          className={errors.phone ? "border-destructive" : ""}
+                          className={`min-h-[48px] text-base ${errors.phone ? "border-destructive" : ""}`}
                         />
                         {errors.phone && (
                           <p className="text-sm text-destructive">{errors.phone}</p>

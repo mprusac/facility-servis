@@ -70,11 +70,11 @@ const Services = () => {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-b from-muted/50 to-background">
-          <div className="container">
+        <section className="py-16 sm:py-20 bg-gradient-to-b from-muted/50 to-background">
+          <div className="container px-4 sm:px-6">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Naše usluge</h1>
-              <p className="text-xl text-muted-foreground">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">Naše usluge</h1>
+              <p className="text-lg sm:text-xl text-muted-foreground px-4">
                 Nudimo sveobuhvatne usluge čišćenja i održavanja za različite vrste objekata. 
                 Koristimo profesionalna sredstva i opremu kako bismo osigurali vrhunske rezultate.
               </p>
@@ -109,21 +109,21 @@ const Services = () => {
         {/* CTA Section */}
         <section 
           ref={ctaSection.ref}
-          className={`py-20 bg-muted/50 scroll-reveal ${ctaSection.isVisible ? 'revealed' : ''}`}
+          className={`py-16 sm:py-20 bg-muted/50 scroll-reveal ${ctaSection.isVisible ? 'revealed' : ''}`}
         >
-          <div className="container">
+          <div className="container px-4 sm:px-6">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
                 Trebate ponudu za vaš prostor?
               </h2>
-              <p className="text-xl text-muted-foreground mb-8">
+              <p className="text-lg sm:text-xl text-muted-foreground mb-6 sm:mb-8 px-4">
                 Kontaktirajte nas za besplatnu procjenu i prilagođenu ponudu
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                <Button asChild size="lg" className="w-full sm:w-auto min-h-[48px] text-base">
                   <Link to="/kontakt#kontakt-forma">Zatraži ponudu</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline">
+                <Button asChild size="lg" variant="outline" className="w-full sm:w-auto min-h-[48px] text-base">
                   <Link to="/galerija">Pogledaj galeriju</Link>
                 </Button>
               </div>
