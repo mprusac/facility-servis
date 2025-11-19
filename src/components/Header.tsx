@@ -42,7 +42,7 @@ const Header = () => {
         </nav>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden transition-transform hover:scale-110" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+        <button className="md:hidden transition-transform hover:scale-110 mr-4" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
