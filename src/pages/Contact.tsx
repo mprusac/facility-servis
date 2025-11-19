@@ -18,6 +18,7 @@ interface FormErrors {
   phone?: string;
   address?: string;
   serviceType?: string;
+  message?: string;
 }
 
 const Contact = () => {
@@ -77,6 +78,11 @@ const Contact = () => {
       errors.serviceType = "Odaberite vrstu prostora";
     }
 
+    const message = (formData.get('message') as string)?.trim();
+    if (!message || message.length < 1) {
+      errors.message = "Potrebno je napisati poruku";
+    }
+
     return errors;
   };
 
@@ -93,6 +99,7 @@ const Contact = () => {
         title: "Greška u formi",
         description: "Molimo ispravite označena polja.",
         variant: "destructive",
+        duration: 6000,
       });
       return;
     }
@@ -119,6 +126,7 @@ const Contact = () => {
       toast({
         title: "Hvala na upitu!",
         description: "Javit ćemo Vam se u najkraćem roku.",
+        duration: 6000,
       });
       (e.target as HTMLFormElement).reset();
       setErrors({});
@@ -128,6 +136,7 @@ const Contact = () => {
         title: "Greška",
         description: "Došlo je do greške. Molimo pokušajte ponovo.",
         variant: "destructive",
+        duration: 6000,
       });
     } finally {
       setIsSubmitting(false);
@@ -286,7 +295,11 @@ const Contact = () => {
                         name="message" 
                         placeholder="Opišite vaše potrebe za čišćenjem..."
                         rows={4}
+                        className={errors.message ? "border-destructive" : ""}
                       />
+                      {errors.message && (
+                        <p className="text-sm text-destructive">{errors.message}</p>
+                      )}
                     </div>
 
                     <Button type="submit" className="w-full" disabled={isSubmitting}>
