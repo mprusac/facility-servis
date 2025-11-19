@@ -74,7 +74,7 @@ const Contact = () => {
     }
 
     if (!serviceType) {
-      errors.serviceType = "Odaberite vrstu prostora/objekta";
+      errors.serviceType = "Odaberite vrstu prostora";
     }
 
     return errors;
@@ -259,7 +259,7 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="serviceType">Vrsta prostora/objekta *</Label>
+                      <Label htmlFor="serviceType">Vrsta prostora *</Label>
                       <Select name="serviceType">
                         <SelectTrigger className={errors.serviceType ? "border-destructive" : ""}>
                           <SelectValue placeholder="Odaberite vrstu usluge" />

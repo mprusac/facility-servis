@@ -89,7 +89,7 @@ const handler = async (req: Request): Promise<Response> => {
       <p><strong>Telefon:</strong> ${escapeHtml(formData.phone)}</p>
       ${formData.company ? `<p><strong>Tvrtka:</strong> ${escapeHtml(formData.company)}</p>` : ''}
       ${formData.address ? `<p><strong>Adresa:</strong> ${escapeHtml(formData.address)}</p>` : ''}
-      <p><strong>Vrsta prostora/objekta:</strong> ${escapeHtml(formData.serviceType)}</p>
+      <p><strong>Vrsta prostora:</strong> ${escapeHtml(formData.serviceType)}</p>
       <p><strong>Poruka:</strong></p>
       <p>${escapeHtml(formData.message)}</p>
     `;
