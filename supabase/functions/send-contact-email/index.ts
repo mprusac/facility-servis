@@ -76,9 +76,14 @@ const handler = async (req: Request): Promise<Response> => {
     const rawData = await req.json();
     const formData: ContactFormData = contactSchema.parse(rawData);
 
-    // Build sanitized email HTML
-    const emailHtml = `
-      <h2>Nova ponuda zahtjev od ${escapeHtml(formData.name)}</h2>
+    // Build subject with company name
+    const emailSubject = formData.company 
+      ? `Nova ponuda | ${escapeHtml(formData.company)}`
+      : `Nova ponuda | ${escapeHtml(formData.name)}`;
+
+    // Build sanitized email HTML for owner
+    const ownerEmailHtml = `
+      <h2>${emailSubject}</h2>
       <p><strong>Ime i prezime:</strong> ${escapeHtml(formData.name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(formData.email)}</p>
       <p><strong>Telefon:</strong> ${escapeHtml(formData.phone)}</p>
@@ -89,11 +94,32 @@ const handler = async (req: Request): Promise<Response> => {
       <p>${escapeHtml(formData.message)}</p>
     `;
 
-    const emailResponse = await resend.emails.send({
+    // Build confirmation email HTML for user
+    const confirmationEmailHtml = `
+      <h2>Hvala što ste nas kontaktirali!</h2>
+      <p>Poštovani/a ${escapeHtml(formData.name)},</p>
+      <p>Primili smo Vaš zahtjev za ponudu i zahvaljujemo Vam na interesu za naše usluge.</p>
+      <p>Naš tim će pregledati Vaš zahtjev i javiti Vam se u najkraćem mogućem roku.</p>
+      <p><strong>Detalji Vašeg zahtjeva:</strong></p>
+      <p><strong>Vrsta prostora/objekta:</strong> ${escapeHtml(formData.serviceType)}</p>
+      ${formData.address ? `<p><strong>Adresa:</strong> ${escapeHtml(formData.address)}</p>` : ''}
+      <p>S poštovanjem,<br>Facility Servis tim</p>
+    `;
+
+    // Send email to owner
+    await resend.emails.send({
       from: "Facility Servis <onboarding@resend.dev>",
-      to: ["mprusac0@gmail.com"],
-      subject: `Nova ponuda zahtjev - ${escapeHtml(formData.name)}`,
-      html: emailHtml,
+      to: ["marinprusac5@gmail.com"],
+      subject: emailSubject,
+      html: ownerEmailHtml,
+    });
+
+    // Send confirmation email to user
+    await resend.emails.send({
+      from: "Facility Servis <onboarding@resend.dev>",
+      to: [formData.email],
+      subject: "Hvala na Vašem upitu - Facility Servis",
+      html: confirmationEmailHtml,
     });
 
     console.log("Email sent successfully");
