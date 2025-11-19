@@ -241,17 +241,17 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="company">Naziv tvrtke (opcionalno)</Label>
-                      <Input id="company" name="company" placeholder="Naziv vaše tvrtke" />
+                      <Label htmlFor="company" className="text-sm sm:text-base">Naziv tvrtke (opcionalno)</Label>
+                      <Input id="company" name="company" placeholder="Naziv vaše tvrtke" className="min-h-[48px] text-base" />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="address">Adresa lokacije *</Label>
+                      <Label htmlFor="address" className="text-sm sm:text-base">Adresa lokacije *</Label>
                       <Input 
                         id="address" 
                         name="address" 
                         placeholder="Adresa objekta za čišćenje"
-                        className={errors.address ? "border-destructive" : ""}
+                        className={`min-h-[48px] text-base ${errors.address ? "border-destructive" : ""}`}
                       />
                       {errors.address && (
                         <p className="text-sm text-destructive">{errors.address}</p>
@@ -259,9 +259,9 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="serviceType">Vrsta prostora/objekta *</Label>
+                      <Label htmlFor="serviceType" className="text-sm sm:text-base">Vrsta prostora/objekta *</Label>
                       <Select name="serviceType">
-                        <SelectTrigger className={errors.serviceType ? "border-destructive" : ""}>
+                        <SelectTrigger className={`min-h-[48px] text-base ${errors.serviceType ? "border-destructive" : ""}`}>
                           <SelectValue placeholder="Odaberite vrstu usluge" />
                         </SelectTrigger>
                         <SelectContent>
@@ -280,16 +280,17 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message">Poruka</Label>
+                      <Label htmlFor="message" className="text-sm sm:text-base">Poruka</Label>
                       <Textarea 
                         id="message" 
                         name="message" 
                         placeholder="Opišite vaše potrebe za čišćenjem..."
                         rows={4}
+                        className="min-h-[100px] text-base"
                       />
                     </div>
 
-                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    <Button type="submit" className="w-full min-h-[48px] text-base" size="lg" disabled={isSubmitting}>
                       {isSubmitting ? "Šaljem..." : "Pošalji upit"}
                     </Button>
                   </form>
@@ -299,37 +300,37 @@ const Contact = () => {
               {/* Contact Information */}
               <div 
                 ref={contactInfoSection.ref}
-                className={`space-y-6 scroll-reveal ${contactInfoSection.isVisible ? 'revealed' : ''}`}
+                className={`space-y-5 sm:space-y-6 scroll-reveal ${contactInfoSection.isVisible ? 'revealed' : ''}`}
               >
                 <div>
-                  <h2 className="text-3xl font-bold mb-6">Kontakt podaci</h2>
-                  <p className="text-lg text-muted-foreground mb-8">
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Kontakt podaci</h2>
+                  <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8">
                     Možete nas kontaktirati telefonom, emailom ili ispunjavanjem obrasca. 
                     Odgovaramo brzo i rado odgovaramo na sva pitanja.
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {contactInfo.map((item, index) => {
                     const Icon = item.icon;
                     return (
                       <Card key={index}>
-                        <CardContent className="pt-6">
-                          <div className="flex items-start gap-4">
+                        <CardContent className="pt-5 pb-5 sm:pt-6 sm:pb-6 px-5 sm:px-6">
+                          <div className="flex items-start gap-3 sm:gap-4">
                             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
                               <Icon className="h-5 w-5 text-primary" />
                             </div>
-                            <div className="flex-1">
-                              <p className="font-medium mb-1">{item.title}</p>
+                            <div className="flex-1 min-w-0">
+                              <p className="font-medium mb-1 text-base sm:text-lg">{item.title}</p>
                               {item.link ? (
                                 <a 
                                   href={item.link}
-                                  className="text-muted-foreground hover:text-primary transition-colors"
+                                  className="text-muted-foreground hover:text-primary transition-colors text-sm sm:text-base break-words block"
                                 >
                                   {item.content}
                                 </a>
                               ) : (
-                                <p className="text-muted-foreground whitespace-pre-line">
+                                <p className="text-muted-foreground whitespace-pre-line text-sm sm:text-base break-words">
                                   {item.content}
                                 </p>
                               )}
@@ -343,9 +344,9 @@ const Contact = () => {
 
                 {/* Additional Info */}
                 <Card className="bg-secondary/10 border-secondary/20">
-                  <CardContent className="pt-6">
-                    <h3 className="font-semibold text-lg mb-2">Besplatna procjena</h3>
-                    <p className="text-muted-foreground">
+                  <CardContent className="pt-5 pb-5 sm:pt-6 sm:pb-6 px-5 sm:px-6">
+                    <h3 className="font-semibold text-lg sm:text-xl mb-2">Besplatna procjena</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base">
                       Nudimo besplatnu procjenu prostora i prilagođenu ponudu prema vašim potrebama. 
                       Kontaktirajte nas kako bismo dogovorili termin za pregled lokacije.
                     </p>
