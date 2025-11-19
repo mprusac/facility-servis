@@ -107,22 +107,24 @@ const handler = async (req: Request): Promise<Response> => {
     `;
 
     // Send email to owner
-    await resend.emails.send({
+    const ownerEmailResponse = await resend.emails.send({
       from: "Facility Servis <onboarding@resend.dev>",
       to: ["marinprusac5@gmail.com"],
       subject: emailSubject,
       html: ownerEmailHtml,
     });
 
+    console.log("Owner email sent:", ownerEmailResponse);
+
     // Send confirmation email to user
-    await resend.emails.send({
+    const confirmationEmailResponse = await resend.emails.send({
       from: "Facility Servis <onboarding@resend.dev>",
       to: [formData.email],
       subject: "Hvala na Vašem upitu - Facility Servis",
       html: confirmationEmailHtml,
     });
 
-    console.log("Email sent successfully");
+    console.log("Confirmation email sent to user:", confirmationEmailResponse);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
