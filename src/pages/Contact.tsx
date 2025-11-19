@@ -267,10 +267,10 @@ const Contact = () => {
                         <SelectContent>
                           <SelectItem value="obiteljska">Obiteljska kuća/okućnica</SelectItem>
                           <SelectItem value="skladisni">Skladišni prostor</SelectItem>
-                          <SelectItem value="poslovni">Poslovni prostori</SelectItem>
-                          <SelectItem value="sportski">Sportski i korporativni objekti</SelectItem>
-                          <SelectItem value="ugostiteljski">Ugostiteljski objekti</SelectItem>
-                          <SelectItem value="stambeni">Stambene zgrade</SelectItem>
+                          <SelectItem value="poslovni">Poslovni prostor</SelectItem>
+                          <SelectItem value="sportski">Sportski i korporativni objekt</SelectItem>
+                          <SelectItem value="ugostiteljski">Ugostiteljski objekt</SelectItem>
+                          <SelectItem value="stambeni">Stambena zgrada</SelectItem>
                           <SelectItem value="ostalo">Ostalo</SelectItem>
                         </SelectContent>
                       </Select>
