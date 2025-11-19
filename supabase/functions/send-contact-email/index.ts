@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@4.0.0";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
@@ -8,14 +9,48 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-interface ContactFormData {
-  name: string;
-  email: string;
-  phone: string;
-  company?: string;
-  address?: string;
-  serviceType: string;
-  message: string;
+// Rate limiting map (IP -> timestamps)
+const rateLimitMap = new Map<string, number[]>();
+
+// Contact form validation schema
+const contactSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name too long"),
+  email: z.string().email("Invalid email address").max(255, "Email too long"),
+  phone: z.string().regex(/^[\d\s\+\-\(\)]+$/, "Invalid phone format").min(6).max(20),
+  company: z.string().max(100).optional(),
+  address: z.string().trim().min(5, "Address must be at least 5 characters").max(200, "Address too long"),
+  serviceType: z.string().min(1).max(100),
+  message: z.string().trim().min(1, "Message cannot be empty").max(2000, "Message too long")
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
+
+// HTML escaping to prevent XSS
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// Rate limiting check (3 requests per hour per IP)
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const windowMs = 60 * 60 * 1000; // 1 hour
+  const maxRequests = 3;
+  
+  const timestamps = rateLimitMap.get(ip) || [];
+  const recentRequests = timestamps.filter(t => now - t < windowMs);
+  
+  if (recentRequests.length >= maxRequests) {
+    return false;
+  }
+  
+  recentRequests.push(now);
+  rateLimitMap.set(ip, recentRequests);
+  return true;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -24,29 +59,44 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const formData: ContactFormData = await req.json();
-    console.log("Received contact form submission:", formData);
+    // Rate limiting
+    const clientIp = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
+    if (!checkRateLimit(clientIp)) {
+      console.log(`Rate limit exceeded for IP: ${clientIp}`);
+      return new Response(
+        JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }),
+        { 
+          status: 429, 
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        }
+      );
+    }
 
+    // Server-side validation
+    const rawData = await req.json();
+    const formData: ContactFormData = contactSchema.parse(rawData);
+
+    // Build sanitized email HTML
     const emailHtml = `
-      <h2>Nova ponuda zahtjev od ${formData.name}</h2>
-      <p><strong>Ime i prezime:</strong> ${formData.name}</p>
-      <p><strong>Email:</strong> ${formData.email}</p>
-      <p><strong>Telefon:</strong> ${formData.phone}</p>
-      ${formData.company ? `<p><strong>Tvrtka:</strong> ${formData.company}</p>` : ''}
-      ${formData.address ? `<p><strong>Adresa:</strong> ${formData.address}</p>` : ''}
-      <p><strong>Vrsta prostora/objekta:</strong> ${formData.serviceType}</p>
+      <h2>Nova ponuda zahtjev od ${escapeHtml(formData.name)}</h2>
+      <p><strong>Ime i prezime:</strong> ${escapeHtml(formData.name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(formData.email)}</p>
+      <p><strong>Telefon:</strong> ${escapeHtml(formData.phone)}</p>
+      ${formData.company ? `<p><strong>Tvrtka:</strong> ${escapeHtml(formData.company)}</p>` : ''}
+      ${formData.address ? `<p><strong>Adresa:</strong> ${escapeHtml(formData.address)}</p>` : ''}
+      <p><strong>Vrsta prostora/objekta:</strong> ${escapeHtml(formData.serviceType)}</p>
       <p><strong>Poruka:</strong></p>
-      <p>${formData.message}</p>
+      <p>${escapeHtml(formData.message)}</p>
     `;
 
     const emailResponse = await resend.emails.send({
       from: "Facility Servis <onboarding@resend.dev>",
       to: ["mprusac0@gmail.com"],
-      subject: `Nova ponuda zahtjev - ${formData.name}`,
+      subject: `Nova ponuda zahtjev - ${escapeHtml(formData.name)}`,
       html: emailHtml,
     });
 
-    console.log("Email sent successfully:", emailResponse);
+    console.log("Email sent successfully");
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
@@ -56,9 +106,24 @@ const handler = async (req: Request): Promise<Response> => {
       },
     });
   } catch (error: any) {
-    console.error("Error in send-contact-email function:", error);
+    // Handle validation errors
+    if (error instanceof z.ZodError) {
+      console.error("Validation error:", error.errors);
+      return new Response(
+        JSON.stringify({ 
+          error: "Invalid form data", 
+          details: error.errors.map(e => e.message)
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    console.error("Error in send-contact-email function:", error.message);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "Failed to send email" }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
