@@ -11,7 +11,6 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 interface FormErrors {
   name?: string;
   email?: string;
@@ -20,14 +19,14 @@ interface FormErrors {
   serviceType?: string;
   message?: string;
 }
-
 const Contact = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const formSection = useScrollReveal();
   const contactInfoSection = useScrollReveal();
-
   useEffect(() => {
     if (window.location.hash === '#kontakt-forma') {
       setTimeout(() => {
@@ -44,68 +43,54 @@ const Contact = () => {
       }, 100);
     }
   }, []);
-
   const validateForm = (formData: FormData): FormErrors => {
     const errors: FormErrors = {};
-    
     const name = (formData.get('name') as string)?.trim();
     const email = (formData.get('email') as string)?.trim();
     const phone = (formData.get('phone') as string)?.trim();
     const address = (formData.get('address') as string)?.trim();
     const serviceType = formData.get('serviceType') as string;
-
     if (!name || name.length < 2) {
       errors.name = "Ime i prezime mora sadržavati najmanje 2 znaka";
     }
-
     if (!email) {
       errors.email = "Email je obavezan";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       errors.email = "Unesite valjanu email adresu";
     }
-
     if (!phone) {
       errors.phone = "Telefon je obavezan";
     } else if (!/^[\d\s\+\-\(\)]+$/.test(phone) || phone.length < 6) {
       errors.phone = "Unesite valjan broj telefona";
     }
-
     if (!address || address.length < 5) {
       errors.address = "Adresa mora sadržavati najmanje 5 znakova";
     }
-
     if (!serviceType) {
       errors.serviceType = "Odaberite vrstu prostora";
     }
-
     const message = (formData.get('message') as string)?.trim();
     if (!message || message.length < 1) {
       errors.message = "Potrebno je napisati poruku";
     }
-
     return errors;
   };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors({});
-    
     const formData = new FormData(e.currentTarget);
     const validationErrors = validateForm(formData);
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       toast({
         title: "Greška u formi",
         description: "Molimo ispravite označena polja.",
         variant: "destructive",
-        duration: 6000,
+        duration: 6000
       });
       return;
     }
-
     setIsSubmitting(true);
-
     const data = {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
@@ -113,20 +98,19 @@ const Contact = () => {
       company: formData.get('company') as string,
       address: formData.get('address') as string,
       serviceType: formData.get('serviceType') as string,
-      message: formData.get('message') as string,
+      message: formData.get('message') as string
     };
-
     try {
-      const { error } = await supabase.functions.invoke('send-contact-email', {
-        body: data,
+      const {
+        error
+      } = await supabase.functions.invoke('send-contact-email', {
+        body: data
       });
-
       if (error) throw error;
-
       toast({
         title: "Hvala na upitu!",
         description: "Javit ćemo Vam se u najkraćem roku.",
-        duration: 6000,
+        duration: 6000
       });
       (e.target as HTMLFormElement).reset();
       setErrors({});
@@ -136,40 +120,32 @@ const Contact = () => {
         title: "Greška",
         description: "Došlo je do greške. Molimo pokušajte ponovo.",
         variant: "destructive",
-        duration: 6000,
+        duration: 6000
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: "Telefon",
-      content: "091 946 6599",
-      link: "tel:+385919466599",
-    },
-    {
-      icon: Mail,
-      title: "Email",
-      content: "facility-servis@outlook.com",
-      link: "mailto:facility-servis@outlook.com",
-    },
-    {
-      icon: MapPin,
-      title: "Adresa",
-      content: "Zagreb, Hrvatska",
-    },
-    {
-      icon: Clock,
-      title: "Radno vrijeme",
-      content: "Pon-Pet: 00-24h (Non-stop)",
-    },
-  ];
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  const contactInfo = [{
+    icon: Phone,
+    title: "Telefon",
+    content: "091 946 6599",
+    link: "tel:+385919466599"
+  }, {
+    icon: Mail,
+    title: "Email",
+    content: "facility-servis@outlook.com",
+    link: "mailto:facility-servis@outlook.com"
+  }, {
+    icon: MapPin,
+    title: "Adresa",
+    content: "Zagreb, Hrvatska"
+  }, {
+    icon: Clock,
+    title: "Radno vrijeme",
+    content: "Pon-Pet: 00-24h (Non-stop)"
+  }];
+  return <div className="min-h-screen flex flex-col">
       <Header />
       
       <main className="flex-1">
@@ -193,59 +169,33 @@ const Contact = () => {
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
-              <Card 
-                id="kontakt-forma" 
-                ref={formSection.ref}
-                className={`h-fit scroll-reveal-left ${formSection.isVisible ? 'revealed' : ''}`}
-                style={{ boxShadow: 'var(--shadow-card)' }}
-              >
+              <Card id="kontakt-forma" ref={formSection.ref} className={`h-fit scroll-reveal-left ${formSection.isVisible ? 'revealed' : ''}`} style={{
+              boxShadow: 'var(--shadow-card)'
+            }}>
                 <CardHeader>
                   <CardTitle>Zatraži ponudu</CardTitle>
                   <CardDescription>
-                    Popunite obrazac i javit ćemo vam se u najkraćem roku
+                    Popunite obrazac i javit ćemo Vam se u najkraćem roku
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
                       <Label htmlFor="name">Ime i prezime</Label>
-                      <Input
-                        id="name" 
-                        name="name" 
-                        placeholder="Vaše ime i prezime"
-                        className={errors.name ? "border-destructive" : ""}
-                      />
-                      {errors.name && (
-                        <p className="text-sm text-destructive">{errors.name}</p>
-                      )}
+                      <Input id="name" name="name" placeholder="Vaše ime i prezime" className={errors.name ? "border-destructive" : ""} />
+                      {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="email">Email</Label>
-                        <Input
-                          id="email" 
-                          name="email" 
-                          type="email" 
-                          placeholder="vas@email.com"
-                          className={errors.email ? "border-destructive" : ""}
-                        />
-                        {errors.email && (
-                          <p className="text-sm text-destructive">{errors.email}</p>
-                        )}
+                        <Input id="email" name="email" type="email" placeholder="vas@email.com" className={errors.email ? "border-destructive" : ""} />
+                        {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="phone">Telefon</Label>
-                        <Input
-                          id="phone" 
-                          name="phone" 
-                          type="tel" 
-                          placeholder="091 234 5678"
-                          className={errors.phone ? "border-destructive" : ""}
-                        />
-                        {errors.phone && (
-                          <p className="text-sm text-destructive">{errors.phone}</p>
-                        )}
+                        <Input id="phone" name="phone" type="tel" placeholder="091 234 5678" className={errors.phone ? "border-destructive" : ""} />
+                        {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
                       </div>
                     </div>
 
@@ -256,15 +206,8 @@ const Contact = () => {
 
                     <div className="space-y-2">
                       <Label htmlFor="address">Adresa lokacije</Label>
-                      <Input
-                        id="address" 
-                        name="address" 
-                        placeholder="Adresa objekta za čišćenje"
-                        className={errors.address ? "border-destructive" : ""}
-                      />
-                      {errors.address && (
-                        <p className="text-sm text-destructive">{errors.address}</p>
-                      )}
+                      <Input id="address" name="address" placeholder="Adresa objekta za čišćenje" className={errors.address ? "border-destructive" : ""} />
+                      {errors.address && <p className="text-sm text-destructive">{errors.address}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -283,23 +226,13 @@ const Contact = () => {
                           <SelectItem value="ostalo">Ostalo</SelectItem>
                         </SelectContent>
                       </Select>
-                      {errors.serviceType && (
-                        <p className="text-sm text-destructive">{errors.serviceType}</p>
-                      )}
+                      {errors.serviceType && <p className="text-sm text-destructive">{errors.serviceType}</p>}
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="message">Poruka</Label>
-                      <Textarea 
-                        id="message" 
-                        name="message" 
-                        placeholder="Opišite vaše potrebe za čišćenjem..."
-                        rows={4}
-                        className={errors.message ? "border-destructive" : ""}
-                      />
-                      {errors.message && (
-                        <p className="text-sm text-destructive">{errors.message}</p>
-                      )}
+                      <Textarea id="message" name="message" placeholder="Opišite vaše potrebe za čišćenjem..." rows={4} className={errors.message ? "border-destructive" : ""} />
+                      {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                     </div>
 
                     <Button type="submit" className="w-full" disabled={isSubmitting}>
@@ -310,10 +243,7 @@ const Contact = () => {
               </Card>
 
               {/* Contact Information */}
-              <div 
-                ref={contactInfoSection.ref}
-                className={`space-y-6 scroll-reveal ${contactInfoSection.isVisible ? 'revealed' : ''}`}
-              >
+              <div ref={contactInfoSection.ref} className={`space-y-6 scroll-reveal ${contactInfoSection.isVisible ? 'revealed' : ''}`}>
                 <div>
                   <h2 className="text-3xl font-bold mb-6">Kontakt podaci</h2>
                   <p className="text-lg text-muted-foreground mb-8">
@@ -324,9 +254,8 @@ const Contact = () => {
 
                 <div className="space-y-4">
                   {contactInfo.map((item, index) => {
-                    const Icon = item.icon;
-                    return (
-                      <Card key={index}>
+                  const Icon = item.icon;
+                  return <Card key={index}>
                         <CardContent className="pt-6">
                           <div className="flex items-start gap-4">
                             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
@@ -334,24 +263,16 @@ const Contact = () => {
                             </div>
                             <div className="flex-1">
                               <p className="font-medium mb-1">{item.title}</p>
-                              {item.link ? (
-                                <a 
-                                  href={item.link}
-                                  className="text-muted-foreground hover:text-primary transition-colors"
-                                >
+                              {item.link ? <a href={item.link} className="text-muted-foreground hover:text-primary transition-colors">
                                   {item.content}
-                                </a>
-                              ) : (
-                                <p className="text-muted-foreground whitespace-pre-line">
+                                </a> : <p className="text-muted-foreground whitespace-pre-line">
                                   {item.content}
-                                </p>
-                              )}
+                                </p>}
                             </div>
                           </div>
                         </CardContent>
-                      </Card>
-                    );
-                  })}
+                      </Card>;
+                })}
                 </div>
 
                 {/* Additional Info */}
@@ -371,8 +292,6 @@ const Contact = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
