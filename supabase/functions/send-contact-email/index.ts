@@ -153,7 +153,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email to owner
     const ownerEmailResponse = await resend.emails.send({
-      from: "Facility Servis <onboarding@resend.dev>",
+      from: "Facility Servis <no-reply@facility-servis.hr>",
       to: ["facility-servis@outlook.com"],
       subject: emailSubject,
       html: ownerEmailHtml,
@@ -163,7 +163,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to customer
     const confirmationEmailResponse = await resend.emails.send({
-      from: "Facility Servis <onboarding@resend.dev>",
+      from: "Facility Servis <no-reply@facility-servis.hr>",
       to: [formData.email],
       subject: "Hvala na Vašem upitu - Facility Servis",
       html: confirmationEmailHtml,
