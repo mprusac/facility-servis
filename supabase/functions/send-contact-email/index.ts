@@ -121,23 +121,16 @@ const handler = async (req: Request): Promise<Response> => {
               
               <p>Hvala Vam na pokazanom interesu za naše usluge!</p>
               
-              <p>Primili smo Vaš zahtjev za ponudu i zahvaljujemo se na Vašem povjerenju. Vaš upit je trenutno u obradi, a naš stručni tim će ga detaljno razmotriti.</p>
-              
-              <div class="highlight">
-                <strong>📋 Detalji Vašeg zahtjeva:</strong><br>
-                <strong>Vrsta prostora:</strong> ${escapeHtml(formData.serviceType)}<br>
-                ${formData.address ? `<strong>Lokacija:</strong> ${escapeHtml(formData.address)}<br>` : ''}
-                ${formData.company ? `<strong>Tvrtka:</strong> ${escapeHtml(formData.company)}<br>` : ''}
-              </div>
+              <p>Primili smo Vaš zahtjev za ponudu i zahvaljujemo se na Vašem povjerenju. Vaš upit je trenutno u obradi.</p>
               
               <p><strong>Javit ćemo Vam se povratno u najkraćem mogućem roku</strong> kako bismo dogovorili sve potrebne detalje i izradili personaliziranu ponudu prilagođenu Vašim potrebama.</p>
               
               <p>U međuvremenu, ako imate dodatnih pitanja ili želite razgovarati s nama, slobodno nas kontaktirajte:</p>
               
-              <ul style="line-height: 2;">
-                <li>📞 Telefon: <strong>091 946 6599</strong></li>
-                <li>✉️ Email: <strong>facility-servis@outlook.com</strong></li>
-              </ul>
+              <p style="line-height: 2;">
+                📞 Telefon: <strong>091 946 6599</strong><br>
+                ✉️ Email: <strong>facility-servis@outlook.com</strong>
+              </p>
               
               <p style="margin-top: 30px;">S poštovanjem,<br>
               <strong>Facility Servis tim</strong></p>
