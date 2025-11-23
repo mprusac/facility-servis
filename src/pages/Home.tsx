@@ -18,6 +18,7 @@ import heroImage from "@/assets/hero-cleaning.jpg";
 const Home = () => {
   const [scrollY, setScrollY] = useState(0);
   const [showBanner, setShowBanner] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
   const servicesSection = useScrollReveal();
   const testimonialsSection = useScrollReveal();
   const ctaSection = useScrollReveal();
@@ -32,10 +33,16 @@ const Home = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowBanner(false);
+      setIsExiting(true);
+      setTimeout(() => setShowBanner(false), 500);
     }, 6000);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleCloseBanner = () => {
+    setIsExiting(true);
+    setTimeout(() => setShowBanner(false), 500);
+  };
 
   const services = [{
     icon: Building2,
@@ -117,34 +124,32 @@ const Home = () => {
       
       {/* Achievement Banner */}
       {showBanner && (
-        <div className="bg-gradient-to-r from-primary via-primary to-secondary animate-fade-in">
-          <div className="container py-4">
-            <Alert className="border-0 bg-primary-foreground/10 backdrop-blur-sm relative">
-              <TrendingUp className="h-5 w-5 text-primary-foreground" />
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-2 right-2 h-6 w-6 text-primary-foreground hover:bg-primary-foreground/20"
-                onClick={() => setShowBanner(false)}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-              <AlertDescription className="text-primary-foreground font-medium text-base md:text-lg pr-8">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-xl hidden sm:inline">✨</span>
-                  <div className="flex flex-col gap-1">
-                    <span>
-                      <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora!
-                    </span>
-                    <span>
-                      Zahvaljujemo na povjerenju i nastavljamo s istim žarom.
-                    </span>
-                  </div>
-                  <span className="font-bold text-xl hidden sm:inline">✨</span>
+        <div className={`fixed top-20 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-3xl transition-all duration-500 ${isExiting ? 'opacity-0 translate-y-[-20px]' : 'opacity-100 translate-y-0 animate-fade-in'}`}>
+          <Alert className="bg-gradient-to-r from-primary via-primary to-secondary border-0 shadow-2xl backdrop-blur-sm relative">
+            <TrendingUp className="h-5 w-5 text-primary-foreground" />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-2 right-2 h-6 w-6 text-primary-foreground hover:bg-primary-foreground/20"
+              onClick={handleCloseBanner}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+            <AlertDescription className="text-primary-foreground font-medium text-base md:text-lg pr-8">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-xl hidden sm:inline">✨</span>
+                <div className="flex flex-col gap-1">
+                  <span>
+                    <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora!
+                  </span>
+                  <span>
+                    Zahvaljujemo na povjerenju i nastavljamo s istim žarom.
+                  </span>
                 </div>
-              </AlertDescription>
-            </Alert>
-          </div>
+                <span className="font-bold text-xl hidden sm:inline">✨</span>
+              </div>
+            </AlertDescription>
+          </Alert>
         </div>
       )}
       
