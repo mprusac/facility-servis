@@ -117,8 +117,8 @@ const Home = () => {
       
       {/* Achievement Banner */}
       {showBanner && (
-        <div className={`fixed top-20 left-0 right-0 z-50 transition-all duration-500 ${isExiting ? 'opacity-0 translate-y-[-20px]' : 'opacity-100 translate-y-0 animate-fade-in'}`}>
-          <div className="container px-4">
+        <div className={`fixed top-20 left-0 right-0 md:left-1/2 md:-translate-x-1/2 md:right-auto z-50 transition-all duration-500 ${isExiting ? 'opacity-0 translate-y-[-20px]' : 'opacity-100 translate-y-0 animate-fade-in'}`}>
+          <div className="container px-4 md:px-0">
             <Alert className="bg-gradient-to-r from-primary via-primary to-secondary border-0 shadow-2xl backdrop-blur-sm relative px-4 py-3 pr-12">
               <Button
                 variant="ghost"
@@ -128,7 +128,7 @@ const Home = () => {
               >
                 <X className="h-4 w-4" />
               </Button>
-              <div className="text-primary-foreground font-medium text-sm md:text-base lg:text-lg">
+              <div className="text-primary-foreground font-medium text-sm md:text-base lg:text-lg text-center md:text-left">
                 <span>
                   <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora!
                 </span>
