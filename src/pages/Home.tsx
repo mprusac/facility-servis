@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Building2, Dumbbell, UtensilsCrossed, Home as HomeIcon, CheckCircle2, Sparkles } from "lucide-react";
+import { Building2, Dumbbell, UtensilsCrossed, Home as HomeIcon, CheckCircle2, Sparkles, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Carousel,
   CarouselContent,
@@ -105,6 +106,23 @@ const Home = () => {
   ];
   return <div className="min-h-screen flex flex-col">
       <Header />
+      
+      {/* Achievement Banner */}
+      <div className="bg-gradient-to-r from-primary via-primary to-secondary animate-fade-in">
+        <div className="container py-4">
+          <Alert className="border-0 bg-primary-foreground/10 backdrop-blur-sm">
+            <TrendingUp className="h-5 w-5 text-primary-foreground" />
+            <AlertDescription className="text-primary-foreground font-medium text-base md:text-lg flex items-center gap-2">
+              <span className="font-bold text-xl hidden sm:inline">✨</span>
+              <span>
+                <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora! 
+                Zahvaljujemo na povjerenju i nastavljamo s istim žarom.
+              </span>
+              <span className="font-bold text-xl hidden sm:inline">✨</span>
+            </AlertDescription>
+          </Alert>
+        </div>
+      </div>
       
       <main className="flex-1">
         {/* Hero Section with Parallax */}
