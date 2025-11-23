@@ -119,16 +119,16 @@ const Home = () => {
       {showBanner && (
         <div className={`fixed top-20 left-0 right-0 z-50 transition-all duration-500 ${isExiting ? 'opacity-0 translate-y-[-20px]' : 'opacity-100 translate-y-0 animate-fade-in'}`}>
           <div className="container">
-            <Alert className="bg-gradient-to-r from-primary via-primary to-secondary border-0 shadow-2xl backdrop-blur-sm relative p-4 pr-12">
+            <Alert className="bg-gradient-to-r from-primary via-primary to-secondary border-0 shadow-2xl backdrop-blur-sm relative p-2 pr-10">
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-2 right-2 h-6 w-6 text-primary-foreground hover:bg-primary-foreground/20"
+                className="absolute top-1 right-1 h-6 w-6 text-primary-foreground hover:bg-primary-foreground/20"
                 onClick={handleCloseBanner}
               >
                 <X className="h-4 w-4" />
               </Button>
-              <div className="text-primary-foreground font-medium text-base md:text-lg text-center">
+              <div className="text-primary-foreground font-medium text-base md:text-lg text-center py-1">
                 <span>
                   <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora!
                 </span>
