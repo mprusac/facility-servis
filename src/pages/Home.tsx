@@ -31,13 +31,6 @@ const Home = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsExiting(true);
-      setTimeout(() => setShowBanner(false), 500);
-    }, 6000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleCloseBanner = () => {
     setIsExiting(true);
