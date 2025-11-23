@@ -128,14 +128,9 @@ const Home = () => {
               <X className="h-4 w-4" />
             </Button>
             <div className="text-primary-foreground font-medium text-base md:text-lg">
-              <div className="flex flex-col gap-1">
-                <span>
-                  <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora!
-                </span>
-                <span>
-                  Zahvaljujemo na povjerenju i nastavljamo s istim žarom.
-                </span>
-              </div>
+              <span>
+                <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora! Zahvaljujemo na povjerenju i nastavljamo s istim žarom.
+              </span>
             </div>
           </Alert>
         </div>
