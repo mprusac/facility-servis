@@ -133,7 +133,7 @@ const Contact = () => {
     link: "tel:+385919466599"
   }, {
     icon: Mail,
-    title: "E-mail",
+    title: "E-maill",
     content: "facility-servis@outlook.com",
     link: "mailto:facility-servis@outlook.com"
   }, {
