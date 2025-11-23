@@ -154,7 +154,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send email to owner
     const ownerEmailResponse = await resend.emails.send({
       from: "Facility Servis <onboarding@resend.dev>",
-      to: ["mprusac0@gmail.com"],
+      to: ["facility-servis@outlook.com"],
       subject: emailSubject,
       html: ownerEmailHtml,
     });
