@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Building2, Dumbbell, UtensilsCrossed, Home as HomeIcon, CheckCircle2, Sparkles, TrendingUp } from "lucide-react";
+import { Building2, Dumbbell, UtensilsCrossed, Home as HomeIcon, CheckCircle2, Sparkles, TrendingUp, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -17,6 +17,7 @@ import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-cleaning.jpg";
 const Home = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [showBanner, setShowBanner] = useState(true);
   const servicesSection = useScrollReveal();
   const testimonialsSection = useScrollReveal();
   const ctaSection = useScrollReveal();
@@ -27,6 +28,13 @@ const Home = () => {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowBanner(false);
+    }, 6000);
+    return () => clearTimeout(timer);
   }, []);
 
   const services = [{
@@ -108,21 +116,37 @@ const Home = () => {
       <Header />
       
       {/* Achievement Banner */}
-      <div className="bg-gradient-to-r from-primary via-primary to-secondary animate-fade-in">
-        <div className="container py-4">
-          <Alert className="border-0 bg-primary-foreground/10 backdrop-blur-sm">
-            <TrendingUp className="h-5 w-5 text-primary-foreground" />
-            <AlertDescription className="text-primary-foreground font-medium text-base md:text-lg flex items-center gap-2">
-              <span className="font-bold text-xl hidden sm:inline">✨</span>
-              <span>
-                <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora! 
-                Zahvaljujemo na povjerenju i nastavljamo s istim žarom.
-              </span>
-              <span className="font-bold text-xl hidden sm:inline">✨</span>
-            </AlertDescription>
-          </Alert>
+      {showBanner && (
+        <div className="bg-gradient-to-r from-primary via-primary to-secondary animate-fade-in">
+          <div className="container py-4">
+            <Alert className="border-0 bg-primary-foreground/10 backdrop-blur-sm relative">
+              <TrendingUp className="h-5 w-5 text-primary-foreground" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-2 right-2 h-6 w-6 text-primary-foreground hover:bg-primary-foreground/20"
+                onClick={() => setShowBanner(false)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+              <AlertDescription className="text-primary-foreground font-medium text-base md:text-lg pr-8">
+                <div className="flex items-center gap-2">
+                  <span className="font-bold text-xl hidden sm:inline">✨</span>
+                  <div className="flex flex-col gap-1">
+                    <span>
+                      <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora!
+                    </span>
+                    <span>
+                      Zahvaljujemo na povjerenju i nastavljamo s istim žarom.
+                    </span>
+                  </div>
+                  <span className="font-bold text-xl hidden sm:inline">✨</span>
+                </div>
+              </AlertDescription>
+            </Alert>
+          </div>
         </div>
-      </div>
+      )}
       
       <main className="flex-1">
         {/* Hero Section with Parallax */}
