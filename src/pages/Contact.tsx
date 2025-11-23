@@ -188,7 +188,7 @@ const Contact = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">E-mail</Label>
                         <Input id="email" name="email" type="email" placeholder="vas@email.com" className={errors.email ? "border-destructive" : ""} />
                         {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                       </div>
