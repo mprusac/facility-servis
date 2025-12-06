@@ -240,7 +240,7 @@ const Home = () => {
             >
               <CarouselContent className="items-center">
                 {testimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2 flex">
+                  <CarouselItem key={index} className="basis-full md:basis-1/2 flex">
                     <Card className="h-full hover-glow w-full">
                       <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full justify-center">
                         <div className="flex justify-center mb-4 gap-1">
@@ -266,8 +266,8 @@ const Home = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="hidden md:flex w-12 h-12 border-2 hover:scale-110 transition-transform shadow-lg bg-background/95 hover:bg-primary hover:text-primary-foreground" />
-              <CarouselNext className="hidden md:flex w-12 h-12 border-2 hover:scale-110 transition-transform shadow-lg bg-background/95 hover:bg-primary hover:text-primary-foreground" />
+              <CarouselPrevious className="w-10 h-10 md:w-12 md:h-12 border-2 hover:scale-110 transition-transform shadow-lg bg-background/95 hover:bg-primary hover:text-primary-foreground -left-4 md:-left-6" />
+              <CarouselNext className="w-10 h-10 md:w-12 md:h-12 border-2 hover:scale-110 transition-transform shadow-lg bg-background/95 hover:bg-primary hover:text-primary-foreground -right-4 md:-right-6" />
             </Carousel>
           </div>
         </section>
