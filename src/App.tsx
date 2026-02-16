@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import LogoProcessor from "./pages/LogoProcessor";
 import ScrollToTop from "@/components/ScrollToTop";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import PageTransition from "@/components/PageTransition";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <ScrollToTopButton />
+        <WhatsAppButton />
         <PageTransition>
           <Routes>
             <Route path="/" element={<Home />} />
