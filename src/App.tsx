@@ -11,6 +11,8 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import LogoProcessor from "./pages/LogoProcessor";
 import ScrollToTop from "@/components/ScrollToTop";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
+import PageTransition from "@/components/PageTransition";
 
 const queryClient = new QueryClient();
 
@@ -21,16 +23,19 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/usluge" element={<Services />} />
-          <Route path="/galerija" element={<Gallery />} />
-          <Route path="/o-nama" element={<About />} />
-          <Route path="/kontakt" element={<Contact />} />
-          <Route path="/process-logo" element={<LogoProcessor />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ScrollToTopButton />
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/usluge" element={<Services />} />
+            <Route path="/galerija" element={<Gallery />} />
+            <Route path="/o-nama" element={<About />} />
+            <Route path="/kontakt" element={<Contact />} />
+            <Route path="/process-logo" element={<LogoProcessor />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
