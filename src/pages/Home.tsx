@@ -130,7 +130,7 @@ const Home = () => {
               </Button>
               <div className="text-primary-foreground font-medium text-sm md:text-base lg:text-lg text-center md:text-left">
                 <span>
-                  <strong className="font-bold">Studeni u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora!
+                  <strong className="font-bold">2025. u brojkama:</strong> 4.000 m² očišćenih i održavanih prostora!
                 </span>
               </div>
             </Alert>
