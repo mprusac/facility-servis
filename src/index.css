@@ -87,6 +87,28 @@ All colors MUST be HSL.
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+  }
+
+  html {
+    scrollbar-color: hsl(var(--primary)) hsl(var(--muted));
+  }
+
   .bg-checkerboard {
     background-image: 
       linear-gradient(45deg, #e5e5e5 25%, transparent 25%),
